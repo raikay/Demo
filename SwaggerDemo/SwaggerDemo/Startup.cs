@@ -38,12 +38,10 @@ namespace SwaggerDemo
                     Contact = new Swashbuckle.AspNetCore.Swagger.Contact { Name = "SwaggerDemo", Email = "raikay@163.com", Url = "http://www.raikay.com/" }
                 }); 
                 //就是这里
-
                 var basePath = Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath;
                 var xmlPath = System.IO.Path.Combine(basePath, "SwaggerDemo.xml");//这个就是刚刚配置的xml文件名
-                c.IncludeXmlComments(xmlPath, true);//默认的第二个参数是false，这个是controller的注释，记得修改
+                c.IncludeXmlComments(xmlPath, true);//默认的第二个参数是false，这个是controller的注释
             });
-
 
             #endregion
         }

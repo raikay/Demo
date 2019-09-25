@@ -46,7 +46,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ```
 ### 4、查看效果
 访问网址 `http://localhost:5000/swagger/index.html`  
-![](Doc\20190925150742.png)
+![](./SwaggerDemo/Doc/20190925150742.png)
 
 ### 5、设置在域名根目录直接访问swagger
 ```
@@ -85,6 +85,33 @@ app.UseSwaggerUI(c =>
 ```
 ### 添加参数/函数注释
 
-项目上右键属性，点击生成，选中下面 `XML 文档文件`  
-![]()
+###### 项目上右键属性，点击生成，选中下面 `XML 文档文件`  
+  
+![](./SwaggerDemo/Doc/20190925160612.png)
+  
+###### 修改代码  
+```
+#region Swagger
+services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info
+    {
+        Version = "1.0",
+        Title = "SwaggerDemo API",
+        Description = "SwaggerDemo文档",
+        TermsOfService = "None",
+        Contact = new Swashbuckle.AspNetCore.Swagger.Contact { Name = "SwaggerDemo", Email = "raikay@163.com", Url = "http://www.raikay.com/" }
+    }); 
+    //就是这里
+    var basePath = Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath;
+    var xmlPath = System.IO.Path.Combine(basePath, "SwaggerDemo.xml");//这个就是刚刚配置的xml文件名
+    c.IncludeXmlComments(xmlPath, true);//默认的第二个参数是false，这个是controller的注释
+});
+
+#endregion
+```
+*忽略警告编码：`;1591`*
+
+  
+
 
