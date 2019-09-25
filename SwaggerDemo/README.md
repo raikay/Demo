@@ -115,6 +115,9 @@ services.AddSwaggerGen(c =>
 #endregion
 ```
 *忽略警告编码：`;1591`*
+##### 查看效果
+*记得给controller 和参数类都加上注释 才会有注释显示*
+![](./SwaggerDemo/Doc/20190925161919.png)
 
   
 
