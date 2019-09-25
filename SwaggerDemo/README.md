@@ -89,6 +89,10 @@ app.UseSwaggerUI(c =>
   
 ![](./SwaggerDemo/Doc/20190925160612.png)
   
+##### 添加引用
+```
+Microsoft.Extensions.PlatformAbstractions
+```
 ##### 修改代码  
 ```
 #region Swagger
