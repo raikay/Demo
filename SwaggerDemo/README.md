@@ -60,7 +60,7 @@ app.UseSwaggerUI(c =>
 
 ### 6、默认跳转页面修改为swagger  
 
-编辑`Properties`文件夹下 `launchSettings.json` 文件  
+编辑`Properties`文件夹下 `launchSettings.json` 文件，launchUrl值修改为swagger  
   
 ```
   "profiles": {
@@ -83,13 +83,17 @@ app.UseSwaggerUI(c =>
     }
   }
 ```
-### 添加参数/函数注释
+### 7、添加参数/函数注释
 
-###### 项目上右键属性，点击生成，选中下面 `XML 文档文件`  
+##### 项目上右键属性，点击生成，选中下面 `XML 文档文件`  
   
 ![](./SwaggerDemo/Doc/20190925160612.png)
   
-###### 修改代码  
+##### NuGet添加引用
+```
+Microsoft.Extensions.PlatformAbstractions
+```
+##### 修改代码  
 ```
 #region Swagger
 services.AddSwaggerGen(c =>
@@ -111,6 +115,9 @@ services.AddSwaggerGen(c =>
 #endregion
 ```
 *忽略警告编码：`;1591`*
+##### 查看效果
+*记得给controller 和参数类都加上注释 才会有注释显示*
+![](./SwaggerDemo/Doc/20190925161919.png)
 
   
 
