@@ -83,13 +83,13 @@ app.UseSwaggerUI(c =>
     }
   }
 ```
-### 添加参数/函数注释
+### 7、添加参数/函数注释
 
-###### 项目上右键属性，点击生成，选中下面 `XML 文档文件`  
+##### 项目上右键属性，点击生成，选中下面 `XML 文档文件`  
   
 ![](./SwaggerDemo/Doc/20190925160612.png)
   
-###### 修改代码  
+##### 修改代码  
 ```
 #region Swagger
 services.AddSwaggerGen(c =>
