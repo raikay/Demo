@@ -10,12 +10,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SwaggerDemo.Controllers.ValuesController.GetDemo(SwaggerDemo.Model.Param)">
-            <summary>
-            参数 说明文档 测试
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:SwaggerDemo.Controllers.ValuesController.Get(System.Int32)">
             <summary>
             GET api/values/5

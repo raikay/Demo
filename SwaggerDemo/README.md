@@ -147,5 +147,10 @@ services.AddSwaggerGen(c =>
 
 #endregion
 ```
+### 9、隐藏Controller
+如果不想显示某些接口，直接在controller 上，或者action 上，增加特性
+```
+[ApiExplorerSettings(IgnoreApi = true)]
+```
 
 
