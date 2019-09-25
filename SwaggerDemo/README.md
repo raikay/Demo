@@ -46,4 +46,4 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ```
 ### 4、查看效果
 访问网址 `http://localhost:5000/swagger/index.html`  
-![](Doc\20190925150742.png)
+![](SwaggerDemo/SwaggerDemo/Doc/20190925150742.png)
