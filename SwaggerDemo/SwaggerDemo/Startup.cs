@@ -41,6 +41,9 @@ namespace SwaggerDemo
                 var basePath = Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath;
                 var xmlPath = System.IO.Path.Combine(basePath, "SwaggerDemo.xml");//这个就是刚刚配置的xml文件名
                 c.IncludeXmlComments(xmlPath, true);//默认的第二个参数是false，这个是controller的注释
+
+                var xmlModelPath = System.IO.Path.Combine(basePath, "SwaggerDemo.Model.xml");//这个就是Model层的xml文件名
+                c.IncludeXmlComments(xmlModelPath);
             });
 
             #endregion

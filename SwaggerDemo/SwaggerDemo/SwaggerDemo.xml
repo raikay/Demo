@@ -10,7 +10,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SwaggerDemo.Controllers.ValuesController.GetDemo(SwaggerDemo.Controllers.ValuesController.Param)">
+        <member name="M:SwaggerDemo.Controllers.ValuesController.GetDemo(SwaggerDemo.Model.Param)">
             <summary>
             参数 说明文档 测试
             </summary>
@@ -34,21 +34,6 @@
             DELETE api/values/5
             </summary>
             <param name="id"></param>
-        </member>
-        <member name="P:SwaggerDemo.Controllers.ValuesController.Param.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:SwaggerDemo.Controllers.ValuesController.Param.Code">
-            <summary>
-             编号
-            </summary>
-        </member>
-        <member name="P:SwaggerDemo.Controllers.ValuesController.Param.Urn">
-            <summary>
-             网址
-            </summary>
         </member>
     </members>
 </doc>

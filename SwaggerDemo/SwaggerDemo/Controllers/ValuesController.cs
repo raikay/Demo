@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SwaggerDemo.Model;
 
 namespace SwaggerDemo.Controllers
 {
@@ -67,22 +68,5 @@ namespace SwaggerDemo.Controllers
         {
         }
 
-        public class Param
-        {
-            /// <summary>
-            /// 名称
-            /// </summary>
-            public string Name { set; get; }
-
-            /// <summary>
-            ///  编号
-            /// </summary>
-            public int Code { set; get; }
-
-            /// <summary>
-            ///  网址
-            /// </summary>
-            public string Urn { set; get; }
-        }
     }
 }

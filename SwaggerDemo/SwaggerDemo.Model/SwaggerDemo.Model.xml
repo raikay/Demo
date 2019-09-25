@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SwaggerDemo.Model</name>
+    </assembly>
+    <members>
+        <member name="P:SwaggerDemo.Model.Param.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SwaggerDemo.Model.Param.Code">
+            <summary>
+             编号
+            </summary>
+        </member>
+        <member name="P:SwaggerDemo.Model.Param.Urn">
+            <summary>
+             网址
+            </summary>
+        </member>
+    </members>
+</doc>
