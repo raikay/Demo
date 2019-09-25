@@ -36,8 +36,15 @@ namespace SwaggerDemo
                     Description = "SwaggerDemo文档",
                     TermsOfService = "None",
                     Contact = new Swashbuckle.AspNetCore.Swagger.Contact { Name = "SwaggerDemo", Email = "raikay@163.com", Url = "http://www.raikay.com/" }
-                }); ;
+                }); 
+                //就是这里
+
+                var basePath = Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath;
+                var xmlPath = System.IO.Path.Combine(basePath, "SwaggerDemo.xml");//这个就是刚刚配置的xml文件名
+                c.IncludeXmlComments(xmlPath, true);//默认的第二个参数是false，这个是controller的注释，记得修改
             });
+
+
             #endregion
         }
 
@@ -49,11 +56,14 @@ namespace SwaggerDemo
                 app.UseDeveloperExceptionPage();
             }
             #region Swagger
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
+                //c.RoutePrefix = "";//在域名根目录直接访问swagger，
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "SwaggerDemo API V1");
             });
+
             #endregion
             app.UseMvc();
         }

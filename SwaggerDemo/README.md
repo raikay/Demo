@@ -47,3 +47,44 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 ### 4、查看效果
 访问网址 `http://localhost:5000/swagger/index.html`  
 ![](Doc\20190925150742.png)
+
+### 5、设置在域名根目录直接访问swagger
+```
+app.UseSwaggerUI(c =>
+{
+    c.RoutePrefix = "";//在域名根目录直接访问swagger，
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SwaggerDemo API V1");
+});
+
+```
+
+### 6、默认跳转页面修改为swagger  
+
+编辑`Properties`文件夹下 `launchSettings.json` 文件  
+  
+```
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "SwaggerDemo": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+```
+### 添加参数/函数注释
+
+项目上右键属性，点击生成，选中下面 `XML 文档文件`  
+![]()
+
