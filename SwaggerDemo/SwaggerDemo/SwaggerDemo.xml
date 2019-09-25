@@ -4,24 +4,11 @@
         <name>SwaggerDemo</name>
     </assembly>
     <members>
-        <member name="M:SwaggerDemo.Controllers.ValuesController.Get">
+        <member name="M:SwaggerDemo.Controllers.ValuesController.GetDemo(SwaggerDemo.Model.Param)">
             <summary>
-            GET api/values
+            参数 说明文档 测试
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:SwaggerDemo.Controllers.ValuesController.Get(System.Int32)">
-            <summary>
-            GET api/values/5
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SwaggerDemo.Controllers.ValuesController.Post(System.String)">
-            <summary>
-            POST api/values
-            </summary>
-            <param name="value"></param>
         </member>
         <member name="M:SwaggerDemo.Controllers.ValuesController.Delete(System.Int32)">
             <summary>

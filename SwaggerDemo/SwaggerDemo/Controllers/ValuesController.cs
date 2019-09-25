@@ -9,11 +9,11 @@ namespace SwaggerDemo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [ApiExplorerSettings(IgnoreApi = true)]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     public class ValuesController : ControllerBase
     {
 
-        
+        [ApiExplorerSettings(IgnoreApi = true)]
         /// <summary>
         /// GET api/values
         /// </summary>
@@ -23,7 +23,7 @@ namespace SwaggerDemo.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-        [ApiExplorerSettings(IgnoreApi = false)]
+        
         /// <summary>
         /// 参数 说明文档 测试
         /// </summary>
@@ -33,7 +33,7 @@ namespace SwaggerDemo.Controllers
         {
             return new Param();
         }
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         /// <summary>
         /// GET api/values/5
         /// </summary>
@@ -44,7 +44,7 @@ namespace SwaggerDemo.Controllers
         {
             return "value";
         }
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         /// <summary>
         /// POST api/values
         /// </summary>
