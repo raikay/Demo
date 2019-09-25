@@ -60,7 +60,7 @@ app.UseSwaggerUI(c =>
 
 ### 6、默认跳转页面修改为swagger  
 
-编辑`Properties`文件夹下 `launchSettings.json` 文件  
+编辑`Properties`文件夹下 `launchSettings.json` 文件，launchUrl值修改为swagger  
   
 ```
   "profiles": {
