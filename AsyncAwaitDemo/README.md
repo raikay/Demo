@@ -15,7 +15,7 @@ Core中Result阻塞编程，高并发时会造成各种死锁问题，没有更�
 
 [推荐阅读:Async/Await FAQ](https://devblogs.microsoft.com/pfxteam/asyncawait-faq/)  
 
-[译文]（https://www.cnblogs.com/heyuquan/p/async-deadlock.html）
+[译文](https://www.cnblogs.com/heyuquan/p/async-deadlock.html)
 
 代码如下：
 ```
