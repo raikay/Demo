@@ -33,15 +33,15 @@ namespace AutofacDemo
 
             #region AutoFac
             //core 原生 DI
-            //services.AddTransient<IAdvertisementServices, AdvertisementServices>();
+            //services.AddTransient<IServices, Services>();
             //实例化 AutoFac  容器   
             var builder = new ContainerBuilder();
 
             //注册要创建的组件
-            builder.RegisterType<Services>().As<IServices>();
+            builder.RegisterType<Services>();//.As<IServices>();
 
             //var assemblysServices = Assembly.Load("AutofacDemo.Service");//要记得!!!这个注入的是实现类层，不是接口层！不是 IServices
-            //builder.RegisterAssemblyTypes(assemblysServices).AsImplementedInterfaces();//指定已扫描程序集中的类型注册为提供所有其实现的接口。
+            //builder.RegisterAssemblyTypes(assemblysServices);//.AsImplementedInterfaces();//指定已扫描程序集中的类型注册为提供所有其实现的接口。
 
 
             //将services填充到Autofac容器生成器中

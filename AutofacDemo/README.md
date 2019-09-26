@@ -133,3 +133,12 @@ public void AddAssembly(IServiceCollection services, string assemblyName)
 	}
 }
 ```
+### 没有接口的注入
+```
+//单个
+builder.RegisterType<Services>();//.As<IServices>();
+//批量
+//var assemblysServices = Assembly.Load("AutofacDemo.Service");//要记得!!!这个注入的是实现类层，不是接口层！不是 IServices
+//builder.RegisterAssemblyTypes(assemblysServices);//.AsImplementedInterfaces();//指定已扫描程序集中的类型注册为提供所有其实现的接口。
+
+```
