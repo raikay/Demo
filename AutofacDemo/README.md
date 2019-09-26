@@ -23,7 +23,7 @@ public IServiceProvider ConfigureServices(IServiceCollection services)
 		var builder = new ContainerBuilder();
 
 		//注册要创建的组件
-		builder.RegisterType<AdvertisementServices>().As<IAdvertisementServices>();
+		builder.RegisterType<Services>().As<IServices>();
 
 		//将services填充到Autofac容器生成器中
 		builder.Populate(services);
@@ -50,20 +50,20 @@ namespace AutofacDemo.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        readonly IServices _advertisementServices;
+        readonly IServices _services;
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="advertisementServices"></param>
-        public ValuesController(IServices advertisementServices)
+        /// <param name="services"></param>
+        public ValuesController(IServices services)
         {
-            _advertisementServices = advertisementServices;
+            _services = services;
         }
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return _advertisementServices.GetDataList().ToArray();
+            return _services.GetDataList().ToArray();
         }
     }
 }
