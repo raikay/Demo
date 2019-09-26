@@ -9,13 +9,13 @@ async方法内用，await是将异步变为方法内的同步。整个函数相�
 ### 死锁问题
 Framwork中不能使用result,必锁死。  
 
-Core中Result阻塞编程，会造成各种死锁问题，没有更好的解决办法。  
+Core中Result阻塞编程，高并发时会造成各种死锁问题，没有更好的解决办法。  
   
 所以推荐 始终Async  
 
 [推荐阅读:Async/Await FAQ](https://devblogs.microsoft.com/pfxteam/asyncawait-faq/)  
 
-[译文]（https://www.cnblogs.com/heyuquan/p/async-deadlock.html）
+[译文](https://www.cnblogs.com/heyuquan/p/async-deadlock.html)
 
 代码如下：
 ```
