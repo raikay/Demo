@@ -1,9 +1,21 @@
+### result await
 
 使用Result,请求的主线程（threedId=1）会阻塞等待异步线程（threedId=4）执行完毕，主线程继续后面的工作。  
 
 不使用Resutl 遇到await异步方法，主线程会去做其他事情，异步线程执行完毕，返回后由异步线程做后面的工作，  
 
 避免了线程切换的开销。  
+
+### 死锁问题
+Framwork中不能使用result,必锁死。  
+
+Core中Result阻塞编程，会造成各种死锁问题，没有更好的解决办法。  
+  
+所以推荐 始终Async  
+
+[推荐阅读:Async/Await FAQ](https://devblogs.microsoft.com/pfxteam/asyncawait-faq/)  
+
+[译文]（https://www.cnblogs.com/heyuquan/p/async-deadlock.html）
 
 代码如下：
 ```
