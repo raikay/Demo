@@ -1,10 +1,10 @@
-### result await
+### async result await
 
 使用Result,请求的主线程（threedId=1）会阻塞等待异步线程（threedId=4）执行完毕，主线程继续后面的工作。  
 
 不使用Resutl 遇到await异步方法，主线程会去做其他事情，异步线程执行完毕，返回后由异步线程做后面的工作，  
 
-避免了线程切换的开销。  
+async方法内用，await是将异步变为方法内的同步。整个函数相对于调用者来说依然是异步，而且await后的全部工作交给另一个线程，且节省线程切换开销。
 
 ### 死锁问题
 Framwork中不能使用result,必锁死。  
