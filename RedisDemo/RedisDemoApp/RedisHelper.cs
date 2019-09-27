@@ -21,9 +21,9 @@ public class RedisHelper
     #region 构造函数
 
 
-    public RedisHelper()
+    public RedisHelper(int dbNum = 0)
     {
-        DbNum = 0;
+        DbNum = dbNum;
         if (_conn == null)
         {
             lock (Locker)
