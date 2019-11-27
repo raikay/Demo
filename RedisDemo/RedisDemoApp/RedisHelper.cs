@@ -13,14 +13,10 @@ public class RedisHelper
     private int DbNum { get; }
     //Key前缀
     public string CustomKey = "";
-
     private static string RedisConnectionString = "192.168.10.187:6379,allowadmin=true";
-
     private static readonly object Locker = new object();
     private static ConnectionMultiplexer _conn;
     #region 构造函数
-
-
     public RedisHelper(int dbNum = 0)
     {
         DbNum = dbNum;
@@ -33,8 +29,6 @@ public class RedisHelper
             }
         }
     }
-
-
     #endregion 构造函数
 
     #region String
