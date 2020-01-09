@@ -12,7 +12,7 @@ namespace MailKitDemo
 
             var messageToSend = new MimeMessage
             {
-                Sender = new MailboxAddress("dev1", "raikay@163.com"),
+                Sender = new MailboxAddress("dev1", "xiaoshi718@126.com"),
                 Subject = "主题",
             };
             //多个发件人
@@ -21,9 +21,10 @@ namespace MailKitDemo
             //邮件正文 HTML
             //messageToSend.Body = new TextPart(TextFormat.Html) { Text = "<p align=\"center\">This is some text in a paragraph.</p>" };
             //邮件正文 纯文本
-            messageToSend.Body = new TextPart(TextFormat.Plain) { Text = "内容" };
+            messageToSend.Body = new TextPart(TextFormat.Html) { Text = "这是一个测试邮件body内容<a href='http://www.baidu.com'>123</a>" };
+            
             //收件人
-            messageToSend.To.Add(new MailboxAddress("raikay@163.com"));
+            messageToSend.To.Add(new MailboxAddress("xiaoshi718@126.com"));
             //抄送
             //messageToSend.Cc.Add(new MailboxAddress("抄送者Email地址"));
 
@@ -34,9 +35,9 @@ namespace MailKitDemo
 
                 smtp.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                smtp.Connect("smtp.163.com");
+                smtp.Connect("smtp.126.com");
 
-                smtp.Authenticate("raikay", "password");
+                smtp.Authenticate("xiaoshi718", "password");
 
                 smtp.Send(messageToSend);
 
