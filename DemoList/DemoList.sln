@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoList", "DemoList\DemoList.csproj", "{4CC502B1-5D0C-47A1-8D7E-64420F30FB40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoList", "DemoList\DemoList.csproj", "{4CC502B1-5D0C-47A1-8D7E-64420F30FB40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailKitDemo", "MailKitDemo\MailKitDemo.csproj", "{E2BE4587-1BD7-4B8E-9D99-3B25E71AADE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailKitDemo", "MailKitDemo\MailKitDemo.csproj", "{E2BE4587-1BD7-4B8E-9D99-3B25E71AADE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperDemo", "AutoMapperDemo\AutoMapperDemo.csproj", "{9C7EDB04-293C-405F-AE94-87B6DA6C163F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E2BE4587-1BD7-4B8E-9D99-3B25E71AADE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2BE4587-1BD7-4B8E-9D99-3B25E71AADE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2BE4587-1BD7-4B8E-9D99-3B25E71AADE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7EDB04-293C-405F-AE94-87B6DA6C163F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7EDB04-293C-405F-AE94-87B6DA6C163F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7EDB04-293C-405F-AE94-87B6DA6C163F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7EDB04-293C-405F-AE94-87B6DA6C163F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
