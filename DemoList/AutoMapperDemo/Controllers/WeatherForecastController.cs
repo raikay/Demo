@@ -17,15 +17,17 @@ namespace AutoMapperDemo.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly IPostAppService _postAppService;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IPostAppService postAppService)
         {
             _logger = logger;
+            _postAppService = postAppService;
         }
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var obj = _postAppService.GetPostLists();
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

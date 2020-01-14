@@ -25,7 +25,10 @@ namespace AutoMapperDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Config automapper mapping rules
+            services.AddAutoMapperProfiles();
             services.AddControllers();
+            services.AddTransient<IPostAppService, PostAppService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
