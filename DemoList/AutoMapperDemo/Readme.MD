@@ -72,6 +72,8 @@ namespace AutoMapperDemo
 
 
 ### 4、创建映射规则
+Nuget 安装 `AutoMapper.Extensions.Microsoft.DependencyInjection`  
+
 ```
 using AutoMapper;
 using System;
