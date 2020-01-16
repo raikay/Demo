@@ -24,7 +24,7 @@ namespace AutoMapperDemo.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IList<PostViewModel>> Get(PostViewModel request)
+        public async Task<IList<PostViewModel>> Get()
         {
 
             IList<CommentModel> comList = new List<CommentModel>
@@ -42,7 +42,7 @@ namespace AutoMapperDemo.Controllers
             {
                 new PostModel
                 {
-                    Author="作者1",
+                    Author="作者1作者1作者1",
                     CategoryCode=11,
                     Comments=comList,
                     Content="Content1",
@@ -54,8 +54,14 @@ namespace AutoMapperDemo.Controllers
                     Title="title1"
                 }
             };
-            var model = _mapper.Map<IList<PostModel>, IList<PostViewModel>>(datas);
-            return model;
+
+            IList<PostViewModel> list = new List<PostViewModel> {new PostViewModel
+            {
+                Id=Guid.NewGuid(),
+                SerialNo=111111
+            } };
+            list = _mapper.Map<IList<PostModel>, IList<PostViewModel>>(datas);
+            return list;
         }
     }
 }

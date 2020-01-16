@@ -17,8 +17,14 @@ namespace AutoMapperDemo
             // 配置 mapping 规则
             //
             CreateMap<PostModel, PostViewModel>()
-                .ForMember(destination => destination.CommentCounts, source => source.MapFrom(i => i.Comments.Count()))
-                .ForMember(destination => destination.ReleaseDate, source => source.ConvertUsing(new DateTimeConverter()));
+                .ForMember(t => t.CommentCounts, s => s.MapFrom(i => i.Comments.Count()))
+                .ForMember(t => t.AuthorName, s => s.MapFrom(i => i.Author.Substring(1)))
+                .ForMember(t => t.Author, s => s.Ignore())
+                .ForMember(t => t.Id, s => s.Ignore())
+                .ForMember(t => t.SerialNo, s => s.Ignore())
+                .ForMember(t => t.SubDate, s => s.MapFrom(i => i.ReleaseDate.ToString("yyyy年MM月dd日")))
+                .ForMember(t => t.ReleaseDate, s => s.ConvertUsing(new DateTimeConverter()));
+
         }
     }
 

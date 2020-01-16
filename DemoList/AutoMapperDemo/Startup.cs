@@ -31,7 +31,8 @@ namespace AutoMapperDemo
             services.AddAutoMapperProfiles();
             services.AddControllers();
             services.AddMvc(options =>
-            {
+            {   
+                //Json Xml Ë«Ö§³Ö
                 options.InputFormatters.Add(new XmlSerializerInputFormatter(options));
                 options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
             });

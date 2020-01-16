@@ -195,7 +195,7 @@ namespace AutoMapperDemo.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IList<PostViewModel>> Get(PostViewModel request)
+        public async Task<IList<PostViewModel>> Get()
         {
 
             IList<CommentModel> comList = new List<CommentModel>
