@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace AutoMapperDemo.Controllers
 {
@@ -11,31 +13,49 @@ namespace AutoMapperDemo.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private readonly IMapper _mapper;
+        public WeatherForecastController(IMapper mapper)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IPostAppService _postAppService;
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IPostAppService postAppService)
-        {
-            _logger = logger;
-            _postAppService = postAppService;
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IList<PostViewModel>> Get(PostViewModel request)
         {
-            var obj = _postAppService.GetPostLists();
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+
+            IList<CommentModel> comList = new List<CommentModel>
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                new CommentModel
+                {
+                    CommentDate=DateTime.Now,
+                    Content="内容",
+                    Email="sdfas@dfs.cd",
+                    Id=Guid.NewGuid()
+                }
+            };
+
+            List<PostModel> datas = new List<PostModel>
+            {
+                new PostModel
+                {
+                    Author="作者1",
+                    CategoryCode=11,
+                    Comments=comList,
+                    Content="Content1",
+                    Id=Guid.NewGuid(),
+                    Image="img1",
+                    IsDraft=true,
+                    ReleaseDate=DateTime.Now,
+                    SerialNo=23445387,
+                    Title="title1"
+                }
+            };
+            var model = _mapper.Map<IList<PostModel>, IList<PostViewModel>>(datas);
+            return model;
         }
     }
 }

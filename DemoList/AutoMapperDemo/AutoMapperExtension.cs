@@ -16,20 +16,19 @@ namespace AutoMapperDemo
     {
         public static IServiceCollection AddAutoMapperProfiles(this IServiceCollection services)
         {
-            // Get mapper assemblies info from appsettings.json
-            string assemblies = ConfigurationManager.GetConfig("Assembly:Mapper");
+            // 从appsettings.json获取映射程序程序集信息
+            string assemblies = "Assembly:Mapper";// ConfigurationManager.GetConfig("Assembly:Mapper");
 
             if (!string.IsNullOrEmpty(assemblies))
             {
                 var profiles = new List<Type>();
 
-                // The base mapping profile class's type
+                // 映射文件类 类型
                 var parentType = typeof(Profile);
 
                 foreach (var item in assemblies.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    // Get all class which inheritance Profile class
-                    //
+                    // 获取继承配置文件类的所有类
                     var types = Assembly.Load(item).GetTypes()
                         .Where(i => i.BaseType != null && i.BaseType.Name == parentType.Name);
 
@@ -37,7 +36,7 @@ namespace AutoMapperDemo
                         profiles.AddRange(types);
                 }
 
-                // Add mapping rules
+                // 添加映射规则
                 if (profiles.Count() != 0 || profiles.Any())
                     services.AddAutoMapper(profiles.ToArray());
             }
