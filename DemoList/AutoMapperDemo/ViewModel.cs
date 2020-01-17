@@ -21,5 +21,6 @@ namespace AutoMapperDemo
         public short CommentCounts { get; set; }
         public virtual int Count { get; set; }
         public string SubDate { get; set; }
+        public string CreateDate { get; set; }
     }
 }

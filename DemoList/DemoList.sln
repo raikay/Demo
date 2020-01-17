@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoList", "DemoList\DemoLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailKitDemo", "MailKitDemo\MailKitDemo.csproj", "{E2BE4587-1BD7-4B8E-9D99-3B25E71AADE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMapperDemo", "AutoMapperDemo\AutoMapperDemo.csproj", "{9C7EDB04-293C-405F-AE94-87B6DA6C163F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoMapperDemo", "AutoMapperDemo\AutoMapperDemo.csproj", "{9C7EDB04-293C-405F-AE94-87B6DA6C163F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

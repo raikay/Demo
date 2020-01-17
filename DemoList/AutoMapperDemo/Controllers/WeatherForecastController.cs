@@ -27,6 +27,10 @@ namespace AutoMapperDemo.Controllers
         public async Task<IList<PostViewModel>> Get()
         {
 
+            //Mapper.Initialize(x => x.CreateMap<Destination, Source>());
+            //Source source = AutoMapper.Mapper.Map<Source>(des);
+            //Console.WriteLine(source.InfoUrl);
+
             IList<CommentModel> comList = new List<CommentModel>
             {
                 new CommentModel
@@ -42,8 +46,8 @@ namespace AutoMapperDemo.Controllers
             {
                 new PostModel
                 {
-                    Author="作者1作者1作者1",
-                    CategoryCode=11,
+                    Author=null,
+                    CategoryCode=1001,
                     Comments=comList,
                     Content="Content1",
                     Id=Guid.NewGuid(),
