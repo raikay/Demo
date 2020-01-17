@@ -26,7 +26,7 @@ namespace AutoMapperDemo.Controllers
         [HttpGet]
         public async Task<IList<PostViewModel>> Get()
         {
-
+            //低版本
             //Mapper.Initialize(x => x.CreateMap<Destination, Source>());
             //Source source = AutoMapper.Mapper.Map<Source>(des);
             //Console.WriteLine(source.InfoUrl);
