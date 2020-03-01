@@ -3,7 +3,7 @@
 ```
 Swashbuckle.AspNetCore
 ```
-### 2、Startup类中ConfigureServices函数添加代码
+### 2、配置服务：Startup类中ConfigureServices函数添加代码
 ```
 #region Swagger
 public void ConfigureServices(IServiceCollection services)
@@ -26,7 +26,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 #endregion
 ```
-### 3、编辑Configure类
+### 3、启动Http中间件：编辑Configure类
 ```
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
