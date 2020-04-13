@@ -26,7 +26,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 #endregion
 ```
-### 3、编辑Configure类
+### 3、启动Http中间件：编辑Configure类
 ```
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
