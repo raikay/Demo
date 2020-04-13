@@ -1,0 +1,899 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Magicodes.ExporterAndImporter.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Magicodes.ExporterAndImporter.Core.ExporterAttribute">
+            <summary>
+                导出特性
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterAttribute.Name">
+            <summary>
+                名称(比如当前Sheet 名称)
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterAttribute.HeaderFontSize">
+            <summary>
+                头部字体大小
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterAttribute.FontSize">
+            <summary>
+                正文字体大小
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterAttribute.MaxRowNumberOnASheet">
+            <summary>
+            一个Sheet最大允许的行数，设置了之后将输出多个Sheet
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterAttribute.TableStyle">
+            <summary>
+                表格样式风格
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterAttribute.AutoFitAllColumn">
+            <summary>
+                自适应所有列
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterAttribute.Author">
+            <summary>
+                作者
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterAttribute.ExporterHeaderFilter">
+            <summary>
+            头部筛选器
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterHeaderAttribute.DisplayName">
+            <summary>
+                显示名称
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterHeaderAttribute.FontSize">
+            <summary>
+                字体大小
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterHeaderAttribute.IsBold">
+            <summary>
+                是否加粗
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterHeaderAttribute.Format">
+            <summary>
+                格式化
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterHeaderAttribute.IsAutoFit">
+            <summary>
+                是否自适应
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExporterHeaderAttribute.IsIgnore">
+            <summary>
+                是否忽略
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Extension.Extension">
+            <summary>
+                扩展类
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.IsNullOrWhiteSpace(System.String)">
+            <summary>
+                判断指定的字符串是null、空还是空白字符
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.ToDataTable``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+                将集合转成DataTable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.ToList``1(System.Data.DataTable)">
+            <summary>
+                将DataTable转List
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.ToExcelExportFileInfo(System.Byte[],System.String)">
+            <summary>
+            将Bytes导出为Excel文件
+            </summary>
+            <param name="bytes">字节数组</param>
+            <param name="fileName">文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.ToCsvExportFileInfo(System.Byte[],System.String)">
+            <summary>
+            将Bytes导出为Csv文件
+            </summary>
+            <param name="bytes">字节数组</param>
+            <param name="fileName">文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.CheckExcelFileName(System.String)">
+            <summary>
+            检查文件名
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.CheckCsvFileName(System.String)">
+            <summary>
+            检查文件名
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.GetBitmapByUrl(System.String)">
+            <summary>
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.SaveImg(System.Drawing.Image,System.String,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            保存图片
+            </summary>
+            <param name="image"></param>
+            <param name="path">path</param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.Extension.ImgToBase64String(System.Drawing.Image,System.Drawing.Imaging.ImageFormat)">
+            <summary>
+                图片转base64
+            </summary>
+            <param name="image"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Extension.ReadManifestExtensions">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.ReadManifestExtensions.ReadManifestString(System.Reflection.Assembly,System.String)">
+            <summary>
+                读取嵌入式资源
+            </summary>
+            <param name="assembly"></param>
+            <param name="embeddedFileName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions">
+            <summary>
+                Defines the <see cref="T:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions" />
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetDisplayName(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+            <summary>
+                获取显示名
+            </summary>
+            <param name="customAttributeProvider"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetDescription(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+            <summary>
+                获取类型描述
+            </summary>
+            <param name="customAttributeProvider"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetTypeDisplayOrDescription(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+            <summary>
+                获取类型描述或显示名
+            </summary>
+            <param name="customAttributeProvider"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetAttribute``1(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+            <summary>
+                获取程序集属性
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="assembly"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetAttributes``1(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+            <summary>
+                获取程序集属性
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="assembly"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.AttributeExists``1(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+            <summary>
+                检查指定指定类型成员中是否存在指定的Attribute特性
+            </summary>
+            <typeparam name="T">要检查的Attribute特性类型</typeparam>
+            <param name="assembly">The assembly<see cref="T:System.Reflection.ICustomAttributeProvider" /></param>
+            <param name="inherit">是否从继承中查找</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.IsRequired(System.Reflection.PropertyInfo)">
+            <summary>
+                是否必填
+            </summary>
+            <param name="propertyInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetTypesWith``1(System.Reflection.Assembly,System.Boolean)">
+            <summary>
+                获取当前程序集中应用此特性的类
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="assembly"></param>
+            <param name="inherit">The inherit<see cref="T:System.Boolean" /></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetEnumDefinitionList(System.Type)">
+            <summary>
+                获取枚举定义列表
+            </summary>
+            <returns>返回枚举列表元组（名称、值、显示名、描述）</returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.IsNullable(System.Type)">
+            <summary>
+                是否为可为空类型
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetNullableUnderlyingType(System.Type)">
+            <summary>
+                获取可为空类型的底层类型
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetEnumTextAndValues(System.Type)">
+            <summary>
+                获取枚举列表
+            </summary>
+            <param name="type"></param>
+            <returns>
+                key :返回显示名称或者描述
+                value：值
+            </returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetCSharpTypeName(System.Type)">
+            <summary>
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.CreateType(System.Type)">
+            <summary>
+                实例化依赖
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Extension.TypeExtensions.GetAllAssemblies">
+            <summary>
+            获取项目程序集,排除所有的系统程序集(Microsoft.***、System.***等)、Nuget包
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.ExportImageFieldAttribute">
+            <summary>
+                导出图片字段特性
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExportImageFieldAttribute.Height">
+            <summary>
+                高度
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExportImageFieldAttribute.Width">
+            <summary>
+                宽度
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ExportImageFieldAttribute.Alt">
+            <summary>
+                图片不存在时的替代文本
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.ExportImageFieldAttribute.#ctor(System.Int32,System.Int32,System.String)">
+            <summary>
+            </summary>
+            <param name="height"></param>
+            <param name="width"></param>
+            <param name="alt"></param>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.ImportImageFieldAttribute">
+            <summary>
+            导入图片字段特性
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImportImageFieldAttribute.ImageDirectory">
+            <summary>
+                图片存储路径（默认存储到临时目录） 
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImportImageFieldAttribute.ImportImageTo">
+            <summary>
+                图片导出方式（默认Base64）
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.ImportImageFieldAttribute.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.ImportImageFieldAttribute.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="imageDirectory"></param>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Filters.IExporterHeaderFilter">
+            <summary>
+            列头过滤
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Filters.IExporterHeaderFilter.Filter(Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo)">
+            <summary>
+            过滤列头（可以在此处理列名、是否隐藏等）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Filters.IImportHeaderFilter">
+            <summary>
+            导入列头筛选器
+            可以自行处理列头设置、值映射等
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Filters.IImportHeaderFilter.Filter(System.Collections.Generic.List{Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo})">
+            <summary>
+            处理列头
+            </summary>
+            <param name="importerHeaderInfos"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Filters.IImportResultFilter">
+            <summary>
+            导入结果筛选器
+            可以处理标注内容
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Filters.IImportResultFilter.Filter``1(Magicodes.ExporterAndImporter.Core.Models.ImportResult{``0})">
+            <summary>
+            处理导入结果
+            比如对错误信息进行多语言转换
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.IExporter">
+            <summary>
+                导出
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExporter.Export``1(System.String,System.Collections.Generic.ICollection{``0})">
+            <summary>
+                导出
+            </summary>
+            <param name="fileName">文件名称</param>
+            <param name="dataItems">数据</param>
+            <returns>文件</returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExporter.ExportAsByteArray``1(System.Collections.Generic.ICollection{``0})">
+            <summary>
+                导出
+            </summary>
+            <param name="dataItems">数据</param>
+            <returns>文件二进制数组</returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExporter.Export``1(System.String,System.Data.DataTable)">
+            <summary>
+                导出
+            </summary>
+            <param name="fileName">文件名称</param>
+            <param name="dataItems">数据</param>
+            <returns>文件</returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExporter.ExportAsByteArray``1(System.Data.DataTable)">
+            <summary>
+                导出
+            </summary>
+            <param name="dataItems">数据</param>
+            <returns>文件二进制数组</returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExporter.ExportHeaderAsByteArray``1(``0)">
+            <summary>
+                导出表头
+            </summary>
+            <param name="type">类型</param>
+            <returns>文件二进制数组</returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.IExporterByTemplate">
+            <summary>
+            根据模板导出
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.IExportFileByTemplate">
+            <summary>
+            根据模板导出文件
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExportFileByTemplate.ExportByTemplate``1(System.String,``0,System.String)">
+            <summary>
+                根据模板导出
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="fileName"></param>
+            <param name="data"></param>
+            <param name="template">HTML模板或模板路径</param>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.IExportListFileByTemplate">
+            <summary>
+            根据模板导出列表文件
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExportListFileByTemplate.ExportListByTemplate``1(System.String,System.Collections.Generic.ICollection{``0},System.String)">
+            <summary>
+                根据模板导出列表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="fileName"></param>
+            <param name="dataItems"></param>
+            <param name="htmlTemplate"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.IExportListStringByTemplate">
+            <summary>
+            根据模板导出列表字符串
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExportListStringByTemplate.ExportListByTemplate``1(System.Collections.Generic.ICollection{``0},System.String)">
+            <summary>
+                根据模板导出列表
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="dataItems"></param>
+            <param name="htmlTemplate">Html模板内容</param>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.IExportStringByTemplate">
+            <summary>
+            根据模板导出字符串
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IExportStringByTemplate.ExportByTemplate``1(``0,System.String)">
+            <summary>
+                根据模板导出
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <param name="htmlTemplate">Html模板内容</param>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.IImporter">
+            <summary>
+                导入
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IImporter.GenerateTemplate``1(System.String)">
+            <summary> 
+                生成导入模板
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IImporter.GenerateTemplateBytes``1">
+            <summary>
+                生成导入模板
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns>二进制字节</returns>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.IImporter.Import``1(System.String,System.String)">
+            <summary>
+            导入模型验证数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="filePath"></param>
+            <param name="labelingFilePath">标注文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.ImporterAttribute">
+            <summary>
+            导入
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterAttribute.HeaderRowIndex">
+            <summary>
+                表头位置
+            </summary>
+        </member>
+        <member name="F:Magicodes.ExporterAndImporter.Core.ImporterAttribute.MaxCount">
+            <summary>
+            最大允许导入的函数
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterAttribute.ImportResultFilter">
+            <summary>
+            导入结果筛选器
+            必须实现【IExporterHeaderFilter】
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterAttribute.ImportHeaderFilter">
+            <summary>
+            导入列头筛选器
+            必须实现【IImportHeaderFilter】
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute">
+            <summary>
+                导入头部特性
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute.Name">
+            <summary>
+                显示名称
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute.Description">
+            <summary>
+                批注
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute.Author">
+            <summary>
+                作者
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute.AutoTrim">
+            <summary>
+                自动过滤空格，默认启用
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute.FixAllSpace">
+            <summary>
+                处理掉所有的空格，包括中间空格
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute.ColumnIndex">
+            <summary>
+                列索引，如果为0则自动计算
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute.IsAllowRepeat">
+            <summary>
+                是否允许重复
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ImporterHeaderAttribute.IsIgnore">
+            <summary>
+                是否忽略
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.DataRowErrorInfo">
+            <summary>
+                数据行错误信息
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Models.DataRowErrorInfo.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:Magicodes.ExporterAndImporter.Core.Models.DataRowErrorInfo" /> class.
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.DataRowErrorInfo.RowIndex">
+            <summary>
+                序号
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.DataRowErrorInfo.FieldErrors">
+            <summary>
+                字段错误信息
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ErrorLevels">
+            <summary>
+                错误等级
+            </summary>
+        </member>
+        <member name="F:Magicodes.ExporterAndImporter.Core.Models.ErrorLevels.Warning">
+            <summary>
+                警告
+            </summary>
+        </member>
+        <member name="F:Magicodes.ExporterAndImporter.Core.Models.ErrorLevels.Error">
+            <summary>
+                错误
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ExcelHeadStyle">
+            <summary>
+                excel头部样式
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExcelHeadStyle.FontSize">
+            <summary>
+                字体大小
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExcelHeadStyle.IsBold">
+            <summary>
+                是否加粗
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExcelHeadStyle.Format">
+            <summary>
+                格式化
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExcelHeadStyle.IsAutoFit">
+            <summary>
+                是否自适应
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExcelHeadStyle.IsIgnore">
+            <summary>
+                是否忽略
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfoOfListData`1">
+            <summary>
+            </summary>
+            <typeparam name="TData"></typeparam>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfoOfListData`1.#ctor(System.Collections.Generic.ICollection{`0})">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfoOfListData`1.Title">
+            <summary>
+                文档标题
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfoOfListData`1.Headers">
+            <summary>
+                头部信息
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfoOfListData`1.Datas">
+            <summary>
+                数据
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfoOfListData`1.ToDataTable">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfo`1">
+            <summary>
+            </summary>
+            <typeparam name="TData"></typeparam>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfo`1.#ctor(`0)">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfo`1.Title">
+            <summary>
+                文档标题
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfo`1.Headers">
+            <summary>
+                头部信息
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExportDocumentInfo`1.Data">
+            <summary>
+                数据
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo">
+            <summary>
+            导出列头部信息
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo.Index">
+            <summary>
+                列索引
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo.PropertyName">
+            <summary>
+                列名称
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo.ExporterHeaderAttribute">
+            <summary>
+                列属性
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo.ExportImageFieldAttribute">
+            <summary>
+                图片属性
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo.CsTypeName">
+            <summary>
+                C#数据类型
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExporterHeaderInfo.DisplayName">
+            <summary>
+                最终显示的列名
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ExportFileInfo">
+            <summary>
+            导出文件信息
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Models.ExportFileInfo.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Models.ExportFileInfo.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="fileName"></param>
+            <param name="fileType"></param>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExportFileInfo.FileName">
+            <summary>
+            文件名（路径）
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ExportFileInfo.FileType">
+            <summary>
+            文件Mine类型
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo">
+            <summary>
+                导入列头设置
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo.IsRequired">
+            <summary>
+                是否必填
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo.PropertyName">
+            <summary>
+                列名称
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo.Header">
+            <summary>
+                列属性
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo.ImportImageFieldAttribute">
+            <summary>
+                图属性
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo.MappingValues">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImporterHeaderInfo.IsExist">
+            <summary>
+                是否存在
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ImportImageTo">
+            <summary>
+                图片导入类型
+            </summary>
+        </member>
+        <member name="F:Magicodes.ExporterAndImporter.Core.Models.ImportImageTo.TempFolder">
+            <summary>
+                导入到临时目录
+            </summary>
+        </member>
+        <member name="F:Magicodes.ExporterAndImporter.Core.Models.ImportImageTo.Base64">
+            <summary>
+                导入为base64格式
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.ImportResult`1">
+            <summary>
+                导入结果
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.Models.ImportResult`1.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImportResult`1.Data">
+            <summary>
+                导入数据
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImportResult`1.RowErrors">
+            <summary>
+                验证错误
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImportResult`1.TemplateErrors">
+            <summary>
+                模板错误
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImportResult`1.Exception">
+            <summary>
+                导入异常信息
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.ImportResult`1.HasError">
+            <summary>
+                是否存在导入错误
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.Models.TemplateErrorInfo">
+            <summary>
+                模板错误信息
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.TemplateErrorInfo.ErrorLevel">
+            <summary>
+                错误等级
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.TemplateErrorInfo.ColumnName">
+            <summary>
+                Excel列名
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.TemplateErrorInfo.RequireColumnName">
+            <summary>
+                要求的列名
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.Models.TemplateErrorInfo.Message">
+            <summary>
+                消息
+            </summary>
+        </member>
+        <member name="T:Magicodes.ExporterAndImporter.Core.ValueMappingAttribute">
+            <summary>
+                值映射
+            </summary>
+        </member>
+        <member name="M:Magicodes.ExporterAndImporter.Core.ValueMappingAttribute.#ctor(System.String,System.Object)">
+            <summary>
+                设置文本和值映射
+            </summary>
+            <param name="text">文本</param>
+            <param name="value">值</param>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ValueMappingAttribute.Text">
+            <summary>
+                文本
+            </summary>
+        </member>
+        <member name="P:Magicodes.ExporterAndImporter.Core.ValueMappingAttribute.Value">
+            <summary>
+                值
+            </summary>
+        </member>
+    </members>
+</doc>
