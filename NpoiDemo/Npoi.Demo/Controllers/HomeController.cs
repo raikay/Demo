@@ -53,17 +53,17 @@ namespace WebApplication3.Controllers
 
 
             //设置单元格宽度
-            sheet.SetColumnWidth(0, 4500);//核销人
+            sheet.SetColumnWidth(0, 4000);//核销人
             sheet.SetColumnWidth(1, 4000);//账号
-            sheet.SetColumnWidth(2, 6000);//核销时间
+            sheet.SetColumnWidth(2, 5000);//核销时间
 
             sheet.SetColumnWidth(3, 3500);
             sheet.SetColumnWidth(4, 3500);
-            sheet.SetColumnWidth(5, 5000);
-            sheet.SetColumnWidth(6, 8000);
+            sheet.SetColumnWidth(5, 4000);
+            sheet.SetColumnWidth(6, 7000);
             sheet.SetColumnWidth(7, 3500);//全面值
-            sheet.SetColumnWidth(8, 8000);//使用门槛
-            sheet.SetColumnWidth(9, 6000);//核销门店
+            sheet.SetColumnWidth(8, 4500);//使用门槛
+            sheet.SetColumnWidth(9, 5000);//核销门店
             sheet.SetColumnWidth(10, 10000);//appid
             sheet.SetColumnWidth(11, 3500);//核销地址
             sheet.SetColumnWidth(12, 3500);//核销id
@@ -110,6 +110,10 @@ namespace WebApplication3.Controllers
             cellStyleItem.Alignment = HorizontalAlignment.Center; //水平居中
             cellStyleItem.VerticalAlignment = VerticalAlignment.Center; //垂直居中
 
+            HSSFCellStyle cellStyleItem2 = (HSSFCellStyle)book.CreateCellStyle();
+            
+            cellStyleItem2.VerticalAlignment = VerticalAlignment.Center; //垂直居中
+
             for (int i = 1; i < 100; i++)
             {
                 NPOI.SS.UserModel.IRow row2 = sheet.CreateRow(i);
@@ -124,8 +128,13 @@ namespace WebApplication3.Controllers
                 row2.CreateCell(8).SetCellValue("满100元可用");
                 row2.CreateCell(9).SetCellValue("世纪新园中餐厅");
                 row2.CreateCell(10).SetCellValue(System.Guid.NewGuid().ToString());
+                var ignoreList = new List<int> { 5, 8, 9, 10 };
                 for (int j = 0; j < 11; j++)
                 {
+                    if (ignoreList.Contains(j)) 
+                    {
+                        continue;
+                    }
                     row2.Cells[j].CellStyle = cellStyleItem;
                 }
             }
