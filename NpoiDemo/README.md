@@ -3,7 +3,7 @@
 `ActionResult About()`  
 这个导出excel  
 
-![excel](https://github.com/raikay/utility/tree/master/NpoiDemo/20200414151005.png)
+![excel](https://raw.githubusercontent.com/raikay/utility/master/NpoiDemo/20200414151005.png)
 
 鸣谢：  
 
