@@ -2,8 +2,14 @@
 
 `ActionResult About()`  
 这个导出excel  
+.Net Framework 4.6.1  
+
 
 ![excel](./20200414151005.png)
+
+
+![excel](https://raw.githubusercontent.com/raikay/utility/master/NpoiDemo/20200414151005.png)
+
 
 鸣谢：  
 
