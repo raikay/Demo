@@ -16,6 +16,10 @@ namespace AutoMapperDemo
     {
         public static IServiceCollection AddAutoMapperProfiles(this IServiceCollection services)
         {
+
+
+
+
             // 从appsettings.json获取映射程序程序集信息
             string assemblies = "AutoMapperDemo";
 

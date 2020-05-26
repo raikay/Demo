@@ -14,8 +14,10 @@ namespace AutoMapperDemo
         /// </summary>
         public PostProfile()
         {
+
             // 配置 mapping 规则
             //
+            CreateMap<PostModel1, PostViewModel1>();
             CreateMap<PostModel, PostViewModel>()
                 .ForMember(t => t.Author, s => s.NullSubstitute("nullstr"))
                  .ForMember(t => t.CreateDate, s => s.ConvertUsing(new DateTimeConverterSubDate(), a => a.ReleaseDate))
@@ -24,8 +26,11 @@ namespace AutoMapperDemo
                 .ForMember(t => t.SerialNo, s => s.Ignore())
                 .ForMember(t => t.SubDate, s => s.MapFrom(i => i.ReleaseDate.ToString("yyyy年MM月dd日")))
                 .ForMember(t => t.ReleaseDate, s => s.ConvertUsing(new DateTimeConverter()));
+            
 
         }
+
+
     }
 
     public class DateTimeConverter : IValueConverter<DateTime, string>

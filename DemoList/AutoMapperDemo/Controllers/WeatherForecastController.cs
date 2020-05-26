@@ -24,7 +24,7 @@ namespace AutoMapperDemo.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IList<PostViewModel>> Get()
+        public async Task<IList<PostViewModel1>> Get()
         {
             //低版本
             //Mapper.Initialize(x => x.CreateMap<Destination, Source>());
@@ -41,31 +41,30 @@ namespace AutoMapperDemo.Controllers
                     Id=Guid.NewGuid()
                 }
             };
-
-            List<PostModel> datas = new List<PostModel>
+            var postEntity = new PostModel1
             {
-                new PostModel
-                {
-                    Author=null,
-                    CategoryCode=1001,
-                    Comments=comList,
-                    Content="Content1",
-                    Id=Guid.NewGuid(),
-                    Image="img1",
-                    IsDraft=true,
-                    ReleaseDate=DateTime.Now,
-                    SerialNo=23445387,
-                    Title="title1"
-                }
+                Author = null,
+                CategoryCode = 1001,
+                Comments = comList,
+                Content = "Content1",
+                Id = Guid.NewGuid(),
+                Image = "img1",
+                IsDraft = true,
+                ReleaseDate = DateTime.Now,
+                SerialNo = 23445387,
+                Title = "title1"
             };
+            List<PostModel1> datas = new List<PostModel1> { postEntity };
 
-            IList<PostViewModel> list = new List<PostViewModel> {new PostViewModel
-            {
-                Id=Guid.NewGuid(),
-                SerialNo=111111
-            } };
-            list = _mapper.Map<IList<PostModel>, IList<PostViewModel>>(datas);
-            return list;
+            //IList<PostViewModel> list = new List<PostViewModel> {new PostViewModel
+            //{
+            //    Id=Guid.NewGuid(),
+            //    SerialNo=111111
+            //} };
+            var resEntity = postEntity.MapTo< PostViewModel1>();
+
+            //PostViewModel1var   list = _mapper.Map<IList<PostModel1>, IList<PostViewModel1>>(datas);
+            return null;
         }
     }
 }

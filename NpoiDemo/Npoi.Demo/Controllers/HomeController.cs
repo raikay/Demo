@@ -139,19 +139,11 @@ namespace WebApplication3.Controllers
                 }
             }
 
-            // 第二行
 
-
-            // 第3行
-            //NPOI.SS.UserModel.IRow row3 = sheet.CreateRow(1);
-            //row3.CreateCell(0).SetCellValue("31");
-            //row3.CreateCell(1).SetCellValue("32");
-            //row3.CreateCell(2).SetCellValue("33");
 
             // 写入到客户端  
             System.IO.MemoryStream ms = new System.IO.MemoryStream();
             book.Write(ms);
-            // Response.AddHeader("Content-Disposition", string.Format("attachment; filename={0}.xls", DateTime.Now.ToString("yyyyMMddHHmmssfff")));
             Response.ContentType = "application/octet-stream";
             Response.AppendHeader("content-disposition", $"attachment;filename={DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xls;");
 
@@ -159,8 +151,7 @@ namespace WebApplication3.Controllers
             book = null;
             ms.Close();
             ms.Dispose();
-
-            //ViewBag.Message = "Your application description page.";
+            
 
             return null;
         }
