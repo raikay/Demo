@@ -159,43 +159,8 @@ namespace ConsoleApp3
     /// </summary>
     public static class AutoMapperExtension
     {
-        /// <summary>
-        /// 类型映射
-        /// </summary>
-        /// <typeparam name="TDestination">映射后的对象</typeparam>
-        /// <param name="obj">要映射的对象</param>
-        /// <returns></returns>
-        public static TDestination MapTo<TDestination>(this object obj) where TDestination : class
-        {
-            if (obj == null) return default(TDestination);
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<TDestination, object>());
-            var mapper = config.CreateMapper();
-            return mapper.Map<TDestination>(obj);
-        }
-        /// <summary>
-        ///  单个对象映射
-        /// </summary>
-        public static T MapToNew<T>(this object obj)
-        {
-            if (obj == null) return default(T);
-            CreateMap(obj.GetType(), typeof(T));
-            return Mapper.Map<T>(obj);
-        }
-        /// <summary>
-        /// 集合列表类型映射
-        /// </summary>
-        /// <typeparam name="TDestination">目标对象类型</typeparam>
-        /// <param name="source">数据源</param>
-        /// <returns></returns>
-        public static List<TDestination> MapTo<TDestination>(this IEnumerable source) where TDestination : class
-        {
-            if (source == null) return default(List<TDestination>);
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap(source.GetType(), typeof(TDestination)));
-            var mapper = config.CreateMapper();
-            return mapper.Map<List<TDestination>>(source);
-        }
 
         /// <summary>
         /// 集合列表类型映射
