@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailKitDemo", "MailKitDemo\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoMapperDemo", "AutoMapperDemo\AutoMapperDemo.csproj", "{9C7EDB04-293C-405F-AE94-87B6DA6C163F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raikay.Demo.MSJwt", "Raikay.Demo.MSJwt\Raikay.Demo.MSJwt.csproj", "{72F1171E-524F-4B84-BED6-D064953B2523}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raikay.Demo.MSJwt", "Raikay.Demo.MSJwt\Raikay.Demo.MSJwt.csproj", "{72F1171E-524F-4B84-BED6-D064953B2523}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsJwtDemoNew", "MsJwtDemoNew\MsJwtDemoNew.csproj", "{4DE3B0EC-3231-4EAF-9B3E-B730C7D60421}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{72F1171E-524F-4B84-BED6-D064953B2523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72F1171E-524F-4B84-BED6-D064953B2523}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72F1171E-524F-4B84-BED6-D064953B2523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE3B0EC-3231-4EAF-9B3E-B730C7D60421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE3B0EC-3231-4EAF-9B3E-B730C7D60421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE3B0EC-3231-4EAF-9B3E-B730C7D60421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE3B0EC-3231-4EAF-9B3E-B730C7D60421}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

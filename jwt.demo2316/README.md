@@ -108,3 +108,40 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 2. JWT 无法使服务器保存会话状态，当令牌生成后在有效期内无法取消也不能更改；
 
 3. JWT 包含认证信息，如果泄露了，任何人都可以获得令牌所有的权限；因此 JWT 有效期不能太长，对于重要操作每次请求都必须进行身份验证。
+
+
+
+
+
+## 项目请求示例：
+
+**获取jwt token：**
+
+```
+[Get]http://localhost:5000/api/values/GetToken
+```
+
+```json
+{
+    "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyb2JlciIsImp0aSI6IjM0OWU0MGJkLWU5YTMtNDY4Yy04Y2IzLTYxMjc0YmJhODhjMiIsIm5iZiI6MTU5MzU4OTcwNCwiZXhwIjoxNTkzNTkxNTA0LCJpc3MiOiJyb2Jlcklzc3VlciIsImF1ZCI6InJvYmVyQXVkaWVuY2UiLCJhZ2UiOjMwfQ==.blLTsJt60pDF4NionCvfCgBYX66IfrUeyV5VVxl+FR0=",
+    "code": 200,
+    "message": "获取成功"
+}
+```
+
+**验证：**
+
+```
+[Get]http://localhost:5000/api/values/Checktoken
+```
+
+Headers:
+
+```
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJyb2JlciIsImp0aSI6IjM0OWU0MGJkLWU5YTMtNDY4Yy04Y2IzLTYxMjc0YmJhODhjMiIsIm5iZiI6MTU5MzU4OTcwNCwiZXhwIjoxNTkzNTkxNTA0LCJpc3MiOiJyb2Jlcklzc3VlciIsImF1ZCI6InJvYmVyQXVkaWVuY2UiLCJhZ2UiOjMwfQ==.blLTsJt60pDF4NionCvfCgBYX66IfrUeyV5VVxl+FR0=
+```
+返回：
+```
+true
+```
+

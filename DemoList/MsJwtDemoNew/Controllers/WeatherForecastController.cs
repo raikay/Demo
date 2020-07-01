@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Raikay.Demo.MSJwt.Controllers
+namespace MsJwtDemoNew.Controllers
 {
-    //[ApiController]
-    [Route("api/[Controller]/[action]")]
+    [ApiController]
+    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -25,10 +25,15 @@ namespace Raikay.Demo.MSJwt.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "Admin")]
         public IEnumerable<WeatherForecast> Get()
         {
+            var getCookie = "";
+            HttpContext.Request.Cookies.TryGetValue("guid1", out getCookie);
+            HttpContext.Response.Cookies.Append("guid1", Guid.NewGuid().ToString(),new CookieOptions { Domain="raikay.com" });
+            HttpContext.Response.Cookies.Append("guid2", Guid.NewGuid().ToString());
+            HttpContext.Response.Cookies.Append("guid3", Guid.NewGuid().ToString());
             var rng = new Random();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
@@ -36,16 +41,6 @@ namespace Raikay.Demo.MSJwt.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-        }
-
-        public ActionResult GetToken()
-        {
-            var result = TokenCreater.IssueJWT(new TokenModel
-            {
-                Sub = "Admin",
-                Uname = "张三"
-            });
-            return Content(result);
         }
     }
 }
