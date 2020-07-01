@@ -103,8 +103,8 @@ namespace jwt.demo2316
             encodeJwt = encodeJwt.Replace("Bearer ", string.Empty);
             var success = true;
             var jwtArr = encodeJwt.Split('.');
-            var header = JsonConvert.DeserializeObject<Dictionary<string, object>>(Base64Decode(jwtArr[0]));
-            var payLoad = JsonConvert.DeserializeObject<Dictionary<string, object>>(Base64Decode(jwtArr[1]));
+            //var header = JsonConvert.DeserializeObject<Dictionary<string, object>>(Base64Decode(jwtArr[0]));
+            
 
             var hs256 = new System.Security.Cryptography.HMACSHA256(Encoding.ASCII.GetBytes(securityKey));
             //首先验证签名是否正确（必须的）
@@ -115,6 +115,8 @@ namespace jwt.demo2316
             }
             //其次验证是否在有效期内（也应该必须）
             var now = ToUnixEpochDate(DateTime.UtcNow);
+
+            var payLoad = JsonConvert.DeserializeObject<Dictionary<string, object>>(Base64Decode(jwtArr[1]));
             success = success && (now >= long.Parse(payLoad["nbf"].ToString()) && now < long.Parse(payLoad["exp"].ToString()));
 
             //再其次 进行自定义的验证

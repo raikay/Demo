@@ -11,11 +11,11 @@ namespace jwt.demo2316.Controllers
     public class ValuesController : ControllerBase
     {
         // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        //[HttpGet]
+        //public ActionResult<IEnumerable<string>> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET api/values/5
         [HttpGet("{id}")]
@@ -41,8 +41,8 @@ namespace jwt.demo2316.Controllers
         public void Delete(int id)
         {
         }
-        [HttpGet("token")]
-        public ActionResult<dynamic> Token()
+        [HttpGet("GetToken")]
+        public ActionResult<dynamic> GetToken()
         {
             Dictionary<string, object> payLoad = new Dictionary<string, object>();
             payLoad.Add("sub", "rober");
@@ -58,8 +58,8 @@ namespace jwt.demo2316.Controllers
             return new { token = encodeJwt, code = 200, message = "获取成功" };
         }
 
-        [HttpGet("CheckToken")]
-        public ActionResult<dynamic> checktoken()
+        [HttpGet("Checktoken")]
+        public ActionResult<dynamic> Checktoken()
         {
             var encodeJwt = HttpContext.Request.Headers["Authorization"];
             var result = JwtHelper.Validate(encodeJwt, (load) =>
