@@ -112,6 +112,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOiIxNTkzNjY2Mz
 添加拦截器：
 
 ```c#
+
 /// <summary>
 /// 在控制器执行之后调用
 /// </summary>
@@ -122,13 +123,13 @@ public override void OnActionExecuted(ActionExecutedContext context)
 
     if (isAuthenticated)
     {
-
+    
         var jwtToken = TokenHelper.GetToken(new UserDto
         {
             Id = Guid.Parse(context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id").Value),
             Name = context.HttpContext.User.Identity.Name
         });
-
+    
         context.HttpContext.Response.Headers.Add("Authorization", jwtToken);
         context.HttpContext.Response.Cookies.Append("Authorization", jwtToken);
 
@@ -144,7 +145,7 @@ public override void OnActionExecuted(ActionExecutedContext context)
 
 
 
-```c#
+​```c#
 services.AddMvc(options =>
 {
     options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter());
