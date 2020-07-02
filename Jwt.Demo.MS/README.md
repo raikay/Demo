@@ -154,3 +154,6 @@ services.AddMvc(options =>
 });
 ```
 
+
+
+策略版在 分支：https://github.com/raikay/utility/tree/jwt-policy/Jwt.Demo.MS
