@@ -145,7 +145,7 @@ public override void OnActionExecuted(ActionExecutedContext context)
 
 
 
-​```c#
+```c#
 services.AddMvc(options =>
 {
     options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter());
