@@ -1,6 +1,6 @@
 using System;
 
-namespace MsJwtDemoNew
+namespace Jwt.Demo.MS
 {
     public class WeatherForecast
     {
