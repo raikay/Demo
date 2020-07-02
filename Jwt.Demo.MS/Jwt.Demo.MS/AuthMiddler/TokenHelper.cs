@@ -23,7 +23,9 @@ namespace Jwt.Demo.MS
                     new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}") ,
                     new Claim (JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(DateTime.Now.AddMinutes(30)).ToUnixTimeSeconds()}"),
                     new Claim(ClaimTypes.Name, user.Name),
-                    new Claim("Id", user.Id.ToString())
+                    new Claim("Id", user.Id.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, user.Name),
+                    new Claim("Role", "admin")
                 };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Const.SecurityKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

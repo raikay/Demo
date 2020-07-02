@@ -154,3 +154,46 @@ services.AddMvc(options =>
 });
 ```
 
+
+
+# 策略版本
+
+获取token：
+
+```
+http://localhost:5000/Passport?userName=admin&pwd=123
+```
+
+```json
+{
+    "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOiIxNTkzNjg1ODc5IiwiZXhwIjoxNTkzNjg1OTM5LCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJJZCI6Ijg2NGVlY2ZmLTY0MzUtNDU1MS04ZmRmLTczMTFjZDZlYjQ0NyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiYWRtaW4iLCJSb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAifQ.2OzmGOExvhMqQ9qUKZvcwaA9TzfOIeEgGxjDClDKWq8"
+}
+```
+
+验证：
+
+```
+http://localhost:5000/api/val3
+```
+
+header
+
+```
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOiIxNTkzNjg1ODc5IiwiZXhwIjoxNTkzNjg1OTM5LCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJJZCI6Ijg2NGVlY2ZmLTY0MzUtNDU1MS04ZmRmLTczMTFjZDZlYjQ0NyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiYWRtaW4iLCJSb2xlIjoiYWRtaW4iLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAifQ.2OzmGOExvhMqQ9qUKZvcwaA9TzfOIeEgGxjDClDKWq8
+```
+
+
+
+全局验证：
+
+```c#
+services.AddMvc(options =>
+{
+    //全局添加认证 如果函数上面也加特性，会走两边策略
+    //options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter("Permission"));
+    options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter());
+    options.Filters.Add(typeof(PassportAttribute));//刷新token拦截器
+
+});
+```
+

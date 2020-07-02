@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,31 +30,61 @@ namespace Jwt.Demo.MS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+            //添加策略鉴权模式
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Permission", policy => policy.Requirements.Add(new PolicyRequirement()));
+            })
+            //添加JWT Scheme
+            .AddAuthentication(s =>
+            {
+                s.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                s.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                s.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
             //添加jwt验证：
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,//是否验证Issuer
-                        ValidateAudience = true,//是否验证Audience
-                        ValidateLifetime = true,//是否验证失效时间
-                        ClockSkew = TimeSpan.FromSeconds(30),
-                        ValidateIssuerSigningKey = true,//是否验证SecurityKey
-                        ValidAudience = Const.Domain,//Audience
-                        ValidIssuer = Const.Domain,//Issuer，这两项和前面签发jwt的设置一致
-                        
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Const.SecurityKey))//拿到SecurityKey
-                    };
-                });
+           .AddJwtBearer(options =>
+           {
+                  options.TokenValidationParameters = new TokenValidationParameters
+                  {
+                      ValidateLifetime = true,//是否验证失效时间
+                      ClockSkew = TimeSpan.FromSeconds(30),
+
+                      ValidateAudience = true,//是否验证Audience
+                      ValidAudience = Const.Domain,
+                      //ValidAudience = Const.GetValidudience(),//Audience
+                      ValidateIssuer = true,//是否验证Issuer
+                      ValidIssuer = Const.Domain,//Issuer，这两项和前面签发jwt的设置一致
+
+                      ValidateIssuerSigningKey = true,//是否验证SecurityKey
+                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Const.SecurityKey))//拿到SecurityKey
+
+                  };
+               options.Events = new JwtBearerEvents
+               {
+                   OnAuthenticationFailed = context =>
+                   {
+                          //Token expired
+                          if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                       {
+                           context.Response.Headers.Add("Token-Expired", "true");
+                       }
+                       return Task.CompletedTask;
+                   }
+               };
+           });
+            services.AddSingleton<IAuthorizationHandler, PolicyHandler>();//注入策略服务
             services.AddMvc(options =>
             {
+                //全局添加认证 如果函数上面也加特性，会走两边策略
+                //options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter("Permission"));
                 options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter());
-                options.Filters.Add(typeof(PassportAttribute));
+                options.Filters.Add(typeof(PassportAttribute));//刷新token拦截器
 
             });
             services.AddControllers();
-
 
 
         }
@@ -71,7 +102,7 @@ namespace Jwt.Demo.MS
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
