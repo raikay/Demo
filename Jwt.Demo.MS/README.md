@@ -13,7 +13,7 @@ Microsoft.AspNetCore.Authentication.JwtBearer
  public class Const
  {
      /// <summary>
-     /// 这里为了演示，写死一个密钥。实际生产环境可以从配置文件读取,这个是用网上工具随便生成的一个密钥
+     /// Key
      /// </summary>
      public const string SecurityKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDI2a2EJ7m872v0afyoSDJT2o1+SitIeJSWtLJU8/Wz2m7gStexajkeD+Lka6DSTy8gt9UwfgVQo6uKjVLG5Ex7PiGOODVqAEghBuS7JzIYU5RvI543nNDAPfnJsas96mSA7L/mD7RTE2drj6hf3oZjJpMPZUQI/B1Qjb5H3K3PNwIDAQAB";
      public const string Domain = "http://localhost:5000";
@@ -108,4 +108,48 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOiIxNTkzNjY2Mz
 
 
 # 修改为每次请求刷新Token
+
+添加拦截器：
+
+```c#
+/// <summary>
+/// 在控制器执行之后调用
+/// </summary>
+/// <param name="context">执行的上下文</param>
+public override void OnActionExecuted(ActionExecutedContext context)
+{
+    var isAuthenticated = context.HttpContext.User.Identity.IsAuthenticated;
+
+    if (isAuthenticated)
+    {
+
+        var jwtToken = TokenHelper.GetToken(new UserDto
+        {
+            Id = Guid.Parse(context.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Id").Value),
+            Name = context.HttpContext.User.Identity.Name
+        });
+
+        context.HttpContext.Response.Headers.Add("Authorization", jwtToken);
+        context.HttpContext.Response.Cookies.Append("Authorization", jwtToken);
+
+
+    };
+
+}
+```
+
+
+
+修改Startup.ConfigureServices 注册拦截器：
+
+
+
+```c#
+services.AddMvc(options =>
+{
+    options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter());
+    options.Filters.Add(typeof(PassportAttribute));
+
+});
+```
 
