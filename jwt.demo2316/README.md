@@ -92,7 +92,10 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 
 #  如何应用？
 
-一般是在请求头里加入Authorization，并加上Bearer标注：
+需要请求头的 Authorization 字段中使用Bearer 模式添加 JWT，其内容看起来是下面这样：  
+
+（Bearer和jwt之间有一个空格）
+
 ```
 'Authorization': 'Bearer ' + token
 ```
