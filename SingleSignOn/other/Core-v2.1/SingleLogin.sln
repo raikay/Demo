@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityS4", "IdentityS4\IdentityS4.csproj", "{33638AE7-BE0B-4383-86C8-CE09D226D320}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcClient", "MvcClient\MvcClient.csproj", "{BB49C2AB-C375-4425-BC94-28F4C9A09F10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33638AE7-BE0B-4383-86C8-CE09D226D320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33638AE7-BE0B-4383-86C8-CE09D226D320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33638AE7-BE0B-4383-86C8-CE09D226D320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33638AE7-BE0B-4383-86C8-CE09D226D320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB49C2AB-C375-4425-BC94-28F4C9A09F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB49C2AB-C375-4425-BC94-28F4C9A09F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB49C2AB-C375-4425-BC94-28F4C9A09F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB49C2AB-C375-4425-BC94-28F4C9A09F10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87425117-BDCD-4453-9F53-16900B83E0A3}
+	EndGlobalSection
+EndGlobal
