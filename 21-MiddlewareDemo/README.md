@@ -21,7 +21,7 @@ app.Map("/abc", abcBuilder =>
 {
     abcBuilder.Use(async (context, next) =>
     {
-        //await context.Response.WriteAsync("Hello");
+        //await context.Response.WriteAsync("Hello");//已经改变herder后续不可以在操作header，否则报错
         await next();
         await context.Response.WriteAsync("Hello2");
     });
