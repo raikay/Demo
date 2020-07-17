@@ -34,7 +34,7 @@ namespace StaticFilesDemo
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseDefaultFiles();//设置默认文件，这里包括index.html
             app.UseStaticFiles();
             app.UseRouting();
 
