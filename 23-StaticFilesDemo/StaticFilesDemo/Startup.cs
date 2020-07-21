@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -47,8 +48,34 @@ namespace StaticFilesDemo
             {
                 RequestPath = "/files",
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "File"))
-            }); 
+            });
             #endregion
+
+            //非api开头的地址，都从写到index.html(目前主流spa)
+            app.MapWhen(context =>
+            {
+                return !context.Request.Path.Value.StartsWith("/api");
+            }, appBuilder =>
+            {
+                var option = new RewriteOptions();
+                option.AddRewrite(".*", "/index.html", true);
+                appBuilder.UseRewriter(option);
+
+                appBuilder.UseStaticFiles();
+                //推荐上面静态文件中间件方式，不是下面这种自己输出文件的方式，下面这种是缓存用到的请求头
+                //appBuilder.Run(async c =>
+                //{
+                //    var file = env.WebRootFileProvider.GetFileInfo("index.html");
+
+                //    c.Response.ContentType = "text/html";
+                //    using (var fileStream = new FileStream(file.PhysicalPath, FileMode.Open, FileAccess.Read))
+                //    {
+                //        await StreamCopyOperation.CopyToAsync(fileStream, c.Response.Body, null, BufferSize, c.RequestAborted);
+                //    }
+                //});
+            });
+
+
 
             app.UseRouting();
 
