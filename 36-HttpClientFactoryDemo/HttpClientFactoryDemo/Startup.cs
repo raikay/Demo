@@ -43,7 +43,7 @@ namespace HttpClientFactoryDemo
                 client.BaseAddress = new Uri("http://localhost:5003");
             })
             //¹ÜµÀ
-            .AddHttpMessageHandler(provider => provider.GetService<RequestIdDelegatingHandler>())
+            //.AddHttpMessageHandler(provider => provider.GetService<RequestIdDelegatingHandler>())
             ;
             services.AddScoped<NamedOrderServiceClient>();
             #endregion
