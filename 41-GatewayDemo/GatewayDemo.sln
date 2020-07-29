@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayDemo", "GatewayDemo\GatewayDemo.csproj", "{A2804E1B-6953-4E4F-96AC-54F484746F46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCenter", "UCenter\UCenter.csproj", "{B059BF01-24C3-47AA-9DC4-33C1CAFA86E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order", "Order\Order.csproj", "{C4D47758-9E5D-4B39-9BC9-2E1A25EB82BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2804E1B-6953-4E4F-96AC-54F484746F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2804E1B-6953-4E4F-96AC-54F484746F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2804E1B-6953-4E4F-96AC-54F484746F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2804E1B-6953-4E4F-96AC-54F484746F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B059BF01-24C3-47AA-9DC4-33C1CAFA86E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B059BF01-24C3-47AA-9DC4-33C1CAFA86E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B059BF01-24C3-47AA-9DC4-33C1CAFA86E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B059BF01-24C3-47AA-9DC4-33C1CAFA86E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D47758-9E5D-4B39-9BC9-2E1A25EB82BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D47758-9E5D-4B39-9BC9-2E1A25EB82BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D47758-9E5D-4B39-9BC9-2E1A25EB82BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D47758-9E5D-4B39-9BC9-2E1A25EB82BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89DE0A86-3497-4AC6-9BC2-1206C35991B8}
+	EndGlobalSection
+EndGlobal
