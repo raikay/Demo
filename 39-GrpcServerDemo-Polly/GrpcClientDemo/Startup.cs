@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using static GrpcServices.OrderGrpc;
+using Polly;
 
 namespace GrpcClientDemo
 {
@@ -37,6 +38,14 @@ namespace GrpcClientDemo
                 //options.Address = new Uri("https://localhost:5001");
                 options.Address = new Uri("http://localhost:5002");
             })
+                //HttpRequestException、500、408会执行该策略 
+                //.AddTransientHttpErrorPolicy(p=>p.RetryAsync(5)) //重试5次
+                //循环重试，每次时间递增
+                //.AddTransientHttpErrorPolicy(p => p.WaitAndRetryForeverAsync(i => TimeSpan.FromSeconds(i * 3)))
+                //重试20次，每次间隔2秒
+                .AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(20,i => TimeSpan.FromSeconds(2)))
+
+
             ////验证证书用远返回true 允许无效、自签名证书
             //.ConfigurePrimaryHttpMessageHandler(provider =>
             //{
@@ -44,10 +53,26 @@ namespace GrpcClientDemo
             //    handler.SslOptions.RemoteCertificateValidationCallback = (a, b, c, d) => true; //允许无效、或自签名证书
             //    return handler;
             //})
+            ;
+            #region 自定义策略
+            /*
+            var reg = services.AddPolicyRegistry();
+            //retryforever策略
+            reg.Add("retryforever", Policy.HandleResult<HttpResponseMessage>(message =>
+            {
+                //当响应码是201时，执行这个策略
+                return message.StatusCode == System.Net.HttpStatusCode.Created;
+            })
+                //.Fallback(HttpResponseMessage)//可以返回我们定义好的response
+                
+                .RetryForeverAsync()//重试
+                
+            );
+            //为orderclient添加retryforever策略
+            services.AddHttpClient("orderclient").AddPolicyHandlerFromRegistry("retryforever"); 
+            */
+            #endregion
 
-
-
-                ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
