@@ -4,7 +4,7 @@ StackExchange.Redis
 ```
 ### 调用Helper
 
-```
+```csharp
 ﻿RedisHelper redis = new RedisHelper();
 
 #region String
