@@ -51,7 +51,7 @@ namespace RedisDemo.Controllers
 
         public IActionResult GetDis([FromServices] IDistributedCache cache, /*[FromServices] IMemoryCache memoryCache, [FromServices] IEasyCachingProvider easyCaching,*/ [FromQuery] string query)
         {
-            //redis的问题一直没连接上，感觉代码应该没问题了
+            
             #region IDistributedCache
             var key = $"GetDis-{query ?? ""}";
             var time = cache.GetString(key);
