@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace GiteeImgApi
 {
@@ -24,8 +27,12 @@ namespace GiteeImgApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            //services.AddControllers();
+            //services.AddMvc();
+            //services.AddControllersWithViews().AddNewtonsoftJson();
+
+            //services.AddNewtonsoftJson();
+
+            services.AddControllers();
             //services.AddMvc();
         }
 
@@ -36,8 +43,12 @@ namespace GiteeImgApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
-           // app.UseMvc();
+            app.Use((context, next) =>
+            {
+                context.Request.EnableBuffering();
+                return next();
+            });
+            // app.UseMvc();
             app.UseRouting();
 
             //app.UseAuthorization();
