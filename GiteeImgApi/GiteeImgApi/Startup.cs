@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
+using NLog.Extensions.Logging;
 
 namespace GiteeImgApi
 {
@@ -27,13 +28,10 @@ namespace GiteeImgApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvc();
-            //services.AddControllersWithViews().AddNewtonsoftJson();
 
-            //services.AddNewtonsoftJson();
+            // NLog
 
             services.AddControllers();
-            //services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

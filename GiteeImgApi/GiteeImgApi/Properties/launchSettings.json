@@ -20,7 +20,7 @@
     "GiteeImgApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "api/file",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

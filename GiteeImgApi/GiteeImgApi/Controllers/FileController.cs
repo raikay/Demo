@@ -13,20 +13,34 @@ namespace GiteeImgApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IMGController : ControllerBase
+    public class FileController : ControllerBase
     {
 
+        //Nlog构造方法注入
+        private readonly ILogger<FileController> _logger;
 
-        private readonly ILogger<IMGController> _logger;
-
-        public IMGController(ILogger<IMGController> logger)
+        public FileController(ILogger<FileController> logger)
         {
             _logger = logger;
         }
+        public class AddFileParam
+        {
+            public string access_token { set; get; }
 
+            public string content { set; get; }
 
-        [HttpPost]
-        public IActionResult Post( IFormFile file)
+            public string message { set; get; }
+
+            public string branch { set; get; }
+
+        }
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Content("helloworld");
+        }
+            [HttpPost]
+        public IActionResult Post(IFormFile file)
         {
             var r = ReadFromFile(file.OpenReadStream());
             //var s = file;
@@ -51,10 +65,15 @@ namespace GiteeImgApi.Controllers
             var dt = DateTime.Now.ToString("yyyyMMddHHmmsss");
             var fileExt = file.FileName.Split('.')[1];
             string url = $@"https://gitee.com/api/v5/repos/imgrep001/m{rNum.ToString()}/contents/{dt}.{fileExt}";
-            //Console.WriteLine($@"第{i.ToString()}次 : {url}");
-            DebugLogHelper.WriteLog($@"请求Url:{url}");
+
+
+
+            _logger.LogInformation(JsonConvert.SerializeObject(new { RequestUrl = url }));
+
             var resultDataJson = HttpHelper.HttpPost(url, jsonStr);
-            DebugLogHelper.WriteLog($@"返回结果:{resultDataJson}");
+
+            _logger.LogInformation("返回结果"+resultDataJson);
+
             Console.WriteLine(resultDataJson);
             var resultData = JsonConvert.DeserializeObject<dynamic>(resultDataJson);
             //if (file == null || !file.IsValid)
@@ -64,11 +83,11 @@ namespace GiteeImgApi.Controllers
             //if (file != null)
             //   newFile = await file.SaveAs("/data/files/images");
             string reurl = resultData.content.download_url;
-            return new JsonResult( new { url= reurl ,code=1,msg="上传成功"});
+            return new JsonResult(new { url = reurl, code = 1, msg = "上传成功" });
         }
 
 
-        private static string ReadFromFile(Stream fsForRead)
+        private  string ReadFromFile(Stream fsForRead)
         {
             //FileStream fsForRead = new FileStream(path, FileMode.Open);
             string base64Str = "";
@@ -90,7 +109,8 @@ namespace GiteeImgApi.Controllers
             }
             catch (Exception ex)
             {
-                DebugLogHelper.WriteLog("转换base64异常：" + ex.ToString());
+                _logger.LogError("转换base64异常：" + ex.ToString());
+                
                 Console.Write(ex.Message);
                 //Console.ReadLine();
                 return base64Str; ;
@@ -101,19 +121,7 @@ namespace GiteeImgApi.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult Get([FromFile] UserFile file)
-        {
-            var s = file;
-            //if (file == null || !file.IsValid)
-            //return new JsonResult(new { code = 500, message = "不允许上传的文件类型" });
 
-            string newFile = string.Empty;
-            //if (file != null)
-            //   newFile = await file.SaveAs("/data/files/images");
-
-            return new JsonResult(new { code = 0, message = "Get成功", url = newFile });
-        }
         /// <summary>
         /// 删除
         /// </summary>
@@ -134,64 +142,6 @@ namespace GiteeImgApi.Controllers
 
 
     }
-    public class FromFileAttribute : Attribute, IBindingSourceMetadata
-    {
-        public BindingSource BindingSource => BindingSource.FormFile;
-    }
 
-    public class UserFile
-    {
-        [FromForm]
-        public string FileName { get; set; }
-        //public string File { get; set; }
-    }
 
-    public class UserFile1
-    {
-        public string FileName { get; set; }
-        public long Length { get; set; }
-        public string Extension { get; set; }
-        public string FileType { get; set; }
-
-        private readonly static string[] Filters = { ".jpg", ".png", ".bmp" };
-        public bool IsValid => !string.IsNullOrEmpty(this.Extension) && Filters.Contains(this.Extension);
-
-        private IFormFile file;
-        public IFormFile File
-        {
-            get { return file; }
-            set
-            {
-                if (value != null)
-                {
-                    this.file = value;
-
-                    this.FileType = this.file.ContentType;
-                    this.Length = this.file.Length;
-                    this.Extension = this.file.FileName.Substring(file.FileName.LastIndexOf('.'));
-                    if (string.IsNullOrEmpty(this.FileName))
-                        this.FileName = this.FileName;
-                }
-            }
-        }
-
-        public async Task<string> SaveAs(string destinationDir = null)
-        {
-            if (this.file == null)
-                throw new ArgumentNullException("没有需要保存的文件");
-
-            if (destinationDir != null)
-                Directory.CreateDirectory(destinationDir);
-
-            var newName = DateTime.Now.Ticks;
-            var newFile = Path.Combine(destinationDir ?? "", $"{newName}{this.Extension}");
-            using (FileStream fs = new FileStream(newFile, FileMode.CreateNew))
-            {
-                await this.file.CopyToAsync(fs);
-                fs.Flush();
-            }
-
-            return newFile;
-        }
-    }
 }
