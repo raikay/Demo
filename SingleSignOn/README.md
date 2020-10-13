@@ -86,12 +86,6 @@ https://www.cnblogs.com/lxb218/p/9419185.html
 
 https://www.jianshu.com/p/56b577d8f786
 
-
-
-
-
-
-
 ```\
 new Client
 {
@@ -116,17 +110,11 @@ new Client
 
 名字ClientName随意，ClientId必须保持一致
 
-
-
-
-
 获取userinfo
 
 ```
 http://localhost:5800/connect/userinfo
 ```
-
-
 
 获取token:
 
@@ -147,8 +135,98 @@ scope:address Auth email offline_access openid phone profile
 //refresh_token:hifEmkoixfdt3xbXCZwt7gs1qjDChSQDEumkA21TbK4
 ```
 
-
-
 client_credentials
 
  理解OAuth 2.0：http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html
+
+```c#
+static async Task Main(string[] args)
+{
+    Console.WriteLine("Hello World!");
+
+    #region 获取token
+    var client = new HttpClient();
+    ////获取文档、校验地址
+    var disco = await client.GetDiscoveryDocumentAsync("http://localhost:50000/");
+    if (disco.IsError)
+    {
+        Console.WriteLine(disco.Error);
+        return;
+    }
+
+    // request access token
+    var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
+    {
+        Address = "http://localhost:50000/connect/token", //disco.TokenEndpoint,//disco.UserInfoEndpoint, //
+        ClientId = "console client",
+        ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A",
+        Scope = "api1 offline_access",
+        UserName = "admin",//如果不是密码模式,是ClientCredentials不需要 UserName 、Password，其都一样，ClientCredentials好像不能刷新token
+        Password = "1234",
+        GrantType = GrantTypes.Password
+
+    });
+
+
+    if (tokenResponse.IsError)
+    {
+        Console.WriteLine(tokenResponse.Error);
+        return;
+    }
+
+    #endregion
+
+    #region 刷新token
+    //判断用户过期
+    var s0 = tokenResponse.AccessToken.Split(".")[1];
+    var s1 = Base64Decode(s0);
+
+    var s2 = JsonConvert.DeserializeObject<dynamic>(s1);
+    var s3 = Convert.ToString(s2.exp);
+    DateTime s4 = GetDateTime(s3);
+    var s5 = s4 - DateTime.Now;
+    //过期时间10分钟，如果剩余过期时间小于5分钟 刷新token
+    if (s5.Minutes < 5)
+    {
+        tokenResponse = await client.RequestRefreshTokenAsync(new RefreshTokenRequest
+        {
+            Address = disco.TokenEndpoint,
+            GrantType = GrantTypes.RefreshToken,
+            ClientId = "console client",
+            ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A",
+            Scope = "api1 offline_access",
+            RefreshToken = tokenResponse.RefreshToken
+
+        });
+    }
+
+    if (tokenResponse.IsError)
+    {
+        Console.WriteLine(tokenResponse.Error);
+        return;
+    }
+    #endregion
+
+    #region 请求受保护资源
+
+
+    // call Identity Resource API
+    var apiClient = new HttpClient();
+    apiClient.SetBearerToken(tokenResponse.AccessToken);
+    var response = await apiClient.GetAsync("http://localhost:50003/WeatherForecast");//请求受保护的API
+    if (!response.IsSuccessStatusCode)
+    {
+        Console.WriteLine(response.StatusCode);
+    }
+    else
+    {
+        var content = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(JArray.Parse(content));
+    }
+
+    #endregion
+
+    Console.ReadKey();
+}
+```
+
