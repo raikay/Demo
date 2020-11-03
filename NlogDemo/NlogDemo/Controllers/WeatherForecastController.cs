@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace StartUpDemo.Controllers
+namespace NlogDemo1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -26,7 +26,9 @@ namespace StartUpDemo.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            _logger.LogDebug("这是自定义debug日志");
+            _logger.LogError("错误日志");
+            _logger.LogDebug("调试日志");
+            throw new Exception("自定义错误");
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
