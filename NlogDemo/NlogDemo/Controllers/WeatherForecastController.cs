@@ -28,7 +28,8 @@ namespace NlogDemo1.Controllers
         {
             _logger.LogError("错误日志");
             _logger.LogDebug("调试日志");
-            throw new Exception("自定义错误");
+            var s = 0;
+            var s1 = 5 / s;
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
