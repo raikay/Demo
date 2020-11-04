@@ -1,4 +1,5 @@
 ﻿
+# 添加日志
 
 ### NuGet
 ```
@@ -47,55 +48,136 @@ namespace NlogDemo1
 ```
 ### 配置文件
 ```
-<?xml version="1.0" encoding="utf-8" ?>
-<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" autoReload="true">
-  　　<targets>
-    　　　　<target name="defaultlog" xsi:type="File" keepFileOpen="false" encoding="utf-8" fileName="${basedir}/logs/${level}${shortdate}.log" maxArchiveFiles="100" layout="${longdate}|${level:uppercase=true}|${logger}|${message}" />
-    　　　　<!--fileName值——表示在程序运行目录，分日志级别按天写入日志文件-->
-    　　　　<!--maxArchiveFiles值——日志文件最大数量，超出则删除最早的文件-->
-    　　　　<!--layout值——日志内容格式：时间+日志级别+LoggerName+日志内容-->　　
+<?xml version="1.0" encoding="utf-8"?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" autoReload="true" internalLogLevel="Info">
+  <!-- 启用.net core的核心布局渲染器 -->
+  <extensions>
+    <add assembly="NLog.Web.AspNetCore" />
+  </extensions>
+  <!-- 写入日志的目标配置 archiveAboveSize="102400" maxArchiveDays="60" -->
+  <targets>
+    <!-- 调试  -->
+    <target xsi:type="File" name="debug" fileName="../logs/debug-${shortdate}.log" layout="${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}|url: ${aspnet-request-url}|action: ${aspnet-mvc-action}" />
+    <!-- 警告  -->
+    <target xsi:type="File" name="warn" fileName="../logs/warn-${shortdate}.log" layout="${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}|url: ${aspnet-request-url}|action: ${aspnet-mvc-action}" />
+    <!-- 错误  -->
+    <target xsi:type="File" name="error" fileName="../logs/error-${shortdate}.log" layout="${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}|url: ${aspnet-request-url}|action: ${aspnet-mvc-action}" />
+    <!-- 控制台  -->
+    <target xsi:type="Console" name="console" layout="${message}" />
   </targets>
-  　　<rules>
-    　　　　<!--支持将任意级别、任意LoggerName的日志写入target：defaultlog-->
-    　　　　<!--其中*就表示任意，可以改为"项目命名空间.*"，则只输出对应命名空间下的日志。在Info级别尤为明显-->
-    　　　　<logger name="*" minlevel="trace" writeTo="defaultlog" />
+  <!-- 映射规则 -->
+  <rules>
+    <!-- 调试  -->
+    <logger name="*" minlevel="Trace" maxlevel="Debug" writeTo="debug" />
+    <!--<logger name="*" minlevel="Trace" writeTo="console" />-->
+    <!-- 警告  -->
+    <logger name="*" minlevel="Info" maxlevel="Warn" writeTo="warn" />
+    <!-- 错误  -->
+    <logger name="*" minlevel="Error" maxlevel="Fatal" writeTo="error" />
+    <!--跳过不重要的微软日志-->
+    <logger name="Microsoft.*" maxlevel="Info" final="true" />
   </rules>
 </nlog>
 ```
 
 ### 使用log
 ```
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace DemoCore.Controllers
+[HttpGet]
+public IEnumerable<WeatherForecast> Get()
 {
-    [Route("api/[controller]/[action]")]  //Api控制器
-    [ApiController]
-    public class HomeController : Controller
+    _logger.LogError("错误日志");
+    _logger.LogDebug("调试日志");
+    var s = 0;
+    var s1 = 5 / s;
+    var rng = new Random();
+    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
     {
-        private ILogger _logger;
-        public HomeController(ILogger<HomeController> logger)
+        Date = DateTime.Now.AddDays(index),
+        TemperatureC = rng.Next(-20, 55),
+        Summary = Summaries[rng.Next(Summaries.Length)]
+    })
+    .ToArray();
+}
+```
+
+# 全局异常
+
+新建类并实现接口 `IExceptionFilter` / `IAsyncExceptionFilter` 
+
+```
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+
+namespace NlogDemo.Filters
+{
+    public class GlobalExceptionFilter : IExceptionFilter, IAsyncExceptionFilter
+    {
+        private readonly IWebHostEnvironment _env;
+        private readonly ILogger<GlobalExceptionFilter> _logger;
+
+        public GlobalExceptionFilter(IWebHostEnvironment env, ILogger<GlobalExceptionFilter> logger)
         {
+            _env = env;
             _logger = logger;
         }
 
-        // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public void OnException(ExceptionContext context)
         {
-            _logger.LogInformation("测试一下，不要紧张!");
-            return new string[] { "value1", "value2" };
-        }   
+            string message;
+            
+            if (_env.IsProduction())
+            {
+                message =$"IsProduction:{context.Exception.Message}";//Enums.StatusCodes.Status500InternalServerError.ToDescription();
+            }
+            else
+            {
+                message = context.Exception.Message;
+            }
+
+            _logger.LogError(context.Exception, message);
+            //var data = ResponseOutput.NotOk(message);
+            context.Result = new InternalServerErrorResult(new { msg= message });
+        }
+
+        public Task OnExceptionAsync(ExceptionContext context)
+        {
+            OnException(context);
+            return Task.CompletedTask;
+        }
+
+    }
+    public class InternalServerErrorResult : ObjectResult
+    {
+        public InternalServerErrorResult(object value) : base(value)
+        {
+            StatusCode = Microsoft.AspNetCore.Http.StatusCodes.Status500InternalServerError;
+        }
     }
 }
 ```
+注入全局异常处理：
+```
+ options.Filters.Add<GlobalExceptionFilter>();
+```
+如下：
+```
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllers(options =>
+    {
+        options.Filters.Add<GlobalExceptionFilter>();
+        //禁止去除ActionAsync后缀
+        options.SuppressAsyncSuffixInActionNames = false;
+    });
+}
+```
+
+
+
 鸣谢：
 ```
 https://www.cnblogs.com/fger/p/12118437.html
