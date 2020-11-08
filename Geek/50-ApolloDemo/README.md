@@ -1,5 +1,6 @@
 # 50丨配置：使用分布式配置中心方案版本化管理配置
 
+### 一、Apollo配置
 Nuget:
 ```
 Com.Ctrip.Framework.Apollo.Configuration
@@ -16,24 +17,28 @@ public class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((hostBuilderContext, configurationBuilder) =>
             {
-                //阿波罗日志输出级别
-                LogManager.UseConsoleLogging(Com.Ctrip.Framework.Apollo.Logging.LogLevel.Trace);
-                //var c = configurationBuilder.Build().GetSection("Apollo").Get<ApolloOptions>();
-                //注入阿波罗配置
-                configurationBuilder.AddApollo(configurationBuilder.Build().GetSection("Apollo"))
+            //阿波罗日志输出级别
+            LogManager.UseConsoleLogging(Com.Ctrip.Framework.Apollo.Logging.LogLevel.Trace);
+            //var c = configurationBuilder.Build().GetSection("Apollo").Get<ApolloOptions>();
+            //注入阿波罗配置
+            configurationBuilder.AddApollo(configurationBuilder.Build().GetSection("Apollo"))
                 //.AddDefault(Com.Ctrip.Framework.Apollo.Enums.ConfigFileFormat.Json)
                 .AddDefault()
                 .AddNamespace("app-aidemo4438", Com.Ctrip.Framework.Apollo.Enums.ConfigFileFormat.Json)
                 .AddNamespace("application", Com.Ctrip.Framework.Apollo.Enums.ConfigFileFormat.Properties);
-                //本地如果有值覆盖apollo
-                //configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            //本地如果有值覆盖apollo
+            //optional:false 文件不存在报错
+            //reloadOnChange:true  文件变更重新加载配置
+            configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            //最下面的一个文件 覆盖前一个文件
+            configurationBuilder.AddJsonFile("test.json", optional: false, reloadOnChange: true);
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
             });
 }
-
 ```
 
 appsetting
@@ -73,6 +78,66 @@ apollo配置图：
 
 apollo/admin
 
+
+
+
+
+
+
+
+###  二、DotNet Core 使用 IOptions 读取配置文件
+appsettings.json:
+```
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "HC": {
+    "Redis": {
+      "aa": "1"
+    },
+    "DB": {
+      "bb": 2
+    }
+  }
+}
+```
+Startup.cs:
+```
+services.Configure<Test>(Configuration.GetSection("HC"));
+```
+Test.cs(model):
+```
+public class Test
+    {
+        public Redis Redis { get; set; }
+        public DB DB { get; set; }
+    }
+    public class Redis
+    {
+        public string aa { get; set; }
+    }
+    public class DB
+    {
+        public string bb { get; set; }
+    }
+
+```
+调用：
+```
+public Test Test { get; set; }
+
+        public api1Controller(IOptions<Test> options)
+        {
+            Test = options.Value;
+        }
+
+```
 
 
 

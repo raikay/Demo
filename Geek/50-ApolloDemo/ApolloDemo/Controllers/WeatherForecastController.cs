@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace ApolloDemo.Controllers
 {
@@ -25,8 +26,10 @@ namespace ApolloDemo.Controllers
         }
 
         [HttpGet]
-        public string Get([FromServices] IConfiguration configuration)
+        public string Get(/*[FromServices]IOptions<Abc2> options*/)
         {
+            //var a2 = options.Value;
+            //return $"{a2.Abcd2}";
             return $"appolo-abc:{Configs.ApolloAbc} \r\naaa:{Configs.Aaa} \r\nAbc:{Configs.Abc}  \r\nAbc2:{Configs.Abc2?.Abcd2}";//configuration["abc:abcd"];
         }
 

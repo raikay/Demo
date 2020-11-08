@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,14 @@ namespace ApolloDemo
         //Configuration.GetSection("AllowedHosts").Get<List<string>>();
         //string connectionString = Configuration.GetSection("Quartz")["connectionString"];
         private static IConfiguration _configuration;
-        public static void Init(IConfiguration configuration)
+        //private static IServiceCollection _services;
+        public static void Init(IConfiguration configuration/*,IServiceCollection services*/)
         {
             _configuration = configuration;
+            //_services = services;
+
+            //注入配置文件，为IOption读取配置文件
+            //_services.Configure<Abc2>(_configuration.GetSection("abc2"));
         }
         /// <summary>
         /// 阿波罗配置中心
@@ -25,6 +31,7 @@ namespace ApolloDemo
         /// 类对象
         /// </summary>
         public static Abc2 Abc2 => _configuration.GetSection("abc2").Get<Abc2>();
+
         //public static Abc2 Abc2z => _configuration.GetSection(nameof(Abc2)).Get<Abc2>();
         /*
         var configs = new List<OAuthConfiguration>();
