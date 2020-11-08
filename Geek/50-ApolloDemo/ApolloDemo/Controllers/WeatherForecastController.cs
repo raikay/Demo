@@ -17,15 +17,17 @@ namespace ApolloDemo.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
+        //private readonly Configs _config;
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
+            //_config = config;
         }
 
         [HttpGet]
         public string Get([FromServices] IConfiguration configuration)
         {
-            return configuration["abc"];
+            return $"appolo-abc:{Configs.ApolloAbc} \r\naaa:{Configs.Aaa} \r\nAbc:{Configs.Abc}  \r\nAbc2:{Configs.Abc2?.Abcd2}";//configuration["abc:abcd"];
         }
 
         [HttpGet("GetDis")]

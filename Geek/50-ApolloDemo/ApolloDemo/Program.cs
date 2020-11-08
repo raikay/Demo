@@ -33,8 +33,12 @@ public class Program
                 .AddDefault()
                 .AddNamespace("app-aidemo4438", Com.Ctrip.Framework.Apollo.Enums.ConfigFileFormat.Json)
                 .AddNamespace("application", Com.Ctrip.Framework.Apollo.Enums.ConfigFileFormat.Properties);
+
                 //本地如果有值覆盖apollo
-                //configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                //reloadOnChange 如果文件改变 从新加载配置
+                configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                //最下面的一个文件 覆盖前一个文件
+                configurationBuilder.AddJsonFile("test.json", optional: false, reloadOnChange: true);
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
