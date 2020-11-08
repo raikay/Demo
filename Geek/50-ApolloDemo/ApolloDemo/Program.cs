@@ -35,7 +35,8 @@ public class Program
                 .AddNamespace("application", Com.Ctrip.Framework.Apollo.Enums.ConfigFileFormat.Properties);
 
                 //本地如果有值覆盖apollo
-                //reloadOnChange 如果文件改变 从新加载配置
+                //optional:false 文件不存在报错
+                //reloadOnChange:true  文件变更重新加载配置
                 configurationBuilder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                 //最下面的一个文件 覆盖前一个文件
                 configurationBuilder.AddJsonFile("test.json", optional: false, reloadOnChange: true);
