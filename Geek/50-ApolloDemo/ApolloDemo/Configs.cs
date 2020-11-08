@@ -30,6 +30,7 @@ namespace ApolloDemo
         /// <summary>
         /// 类对象
         /// </summary>
+        /// 获取不到abc2不会报错，调用adc2.abcd2是不做处理会报错
         public static Abc2 Abc2 => _configuration.GetSection("abc2").Get<Abc2>();
 
         //public static Abc2 Abc2z => _configuration.GetSection(nameof(Abc2)).Get<Abc2>();
