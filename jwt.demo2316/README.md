@@ -1,10 +1,10 @@
-# 纯天然手写JWT
+## 纯天然手写JWT
 
 > 微软对jwt有封装 idst等一系列 
 > 这个项目主要是没用那些框架以及相关引用，完全原生代码写的  
 > 主要是帮助理解jwt。  
 
-# 什么是jwt？
+## 什么是jwt？
 
 JWT 英文名是 Json Web Token ，是一种用于通信双方之间传递安全信息的简洁的、URL安全的表述性声明规范，经常用在跨域身份验证。  
 
@@ -42,6 +42,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9
 有效载荷是 JWT 的主体，同样也是个 JSON 对象。有效载荷包含三个部分：
 **1、标准注册声明：**
 标准注册声明不是强制使用是的，但是我建议使用。它一般包括以下内容：
+
 ```
 iss：jwt的签发者/发行人；
 sub：主题；
@@ -49,7 +50,7 @@ aud：接收方；
 exp：jwt过期时间；
 nbf：jwt生效时间；
 iat：签发时间
-jti：jwt唯一身份标识，可以避免重放攻击
+jti：jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。
 ```
 **2、公共声明：**
 可以在公共声明添加任何信息，我们一般会在里面添加用户信息和业务信息，但是不建议添加敏感信息，因为公共声明部分可以在客户端解密。  
@@ -85,21 +86,16 @@ TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
 三部分base64中间用点隔开拼接成一个字符串：
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
-
 ```
 
-
-
-#  如何应用？
+##  如何应用？
 
 一般是在请求头里加入Authorization，并加上Bearer标注：
 ```
 'Authorization': 'Bearer ' + token
 ```
 
-
-
-# 注意事项！
+## 注意事项！
 
 在使用 JWT 时需要注意以下事项：
 
@@ -109,11 +105,7 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 
 3. JWT 包含认证信息，如果泄露了，任何人都可以获得令牌所有的权限；因此 JWT 有效期不能太长，对于重要操作每次请求都必须进行身份验证。
 
-
-
-
-
-## 项目请求示例：
+### 项目请求示例：
 
 **获取jwt token：**
 
