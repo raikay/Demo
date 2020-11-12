@@ -43,6 +43,41 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 ```
 
+Startup.Configure()
+
+```
+//认证
+app.UseAuthentication();
+
+//授权
+app.UseAuthorization();
+//-------------------------------------------------------
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+
+    app.UseRouting();
+
+    //认证
+    app.UseAuthentication();
+
+    //授权
+    app.UseAuthorization();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
+}
+```
+
+
+
+
+
 获取jwt函数
 
 ```c#
