@@ -18,7 +18,7 @@ namespace WebApplication3.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public /*ActionResult*/FileContentResult About()
         {
 
 
@@ -40,6 +40,13 @@ namespace WebApplication3.Controllers
 
             cellStyle.Alignment = HorizontalAlignment.Center; //水平居中
             cellStyle.VerticalAlignment = VerticalAlignment.Center; //垂直居中
+
+            //设置黑色边框
+            cellStyle.BorderBottom = BorderStyle.Thin;
+            cellStyle.BorderLeft = BorderStyle.Thin;
+            cellStyle.BorderRight = BorderStyle.Thin;
+            cellStyle.BorderTop = BorderStyle.Thin;
+
 
             //创建字体
             var cellStyleFont = (HSSFFont)book.CreateFont(); 
@@ -88,6 +95,8 @@ namespace WebApplication3.Controllers
 
             for (int i = 0; i < 13; i++)
             {
+                //设置高度
+                row.Height = 400;
                 row.Cells[i].CellStyle = cellStyle;
             }
 
@@ -144,16 +153,18 @@ namespace WebApplication3.Controllers
             // 写入到客户端  
             System.IO.MemoryStream ms = new System.IO.MemoryStream();
             book.Write(ms);
-            Response.ContentType = "application/octet-stream";
-            Response.AppendHeader("content-disposition", $"attachment;filename={DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xls;");
+            //Response.ContentType = "application/octet-stream";
+            //Response.AppendHeader("content-disposition", $"attachment;filename={DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xls;");
 
-            Response.BinaryWrite(ms.ToArray());
-            book = null;
-            ms.Close();
-            ms.Dispose();
+            //Response.BinaryWrite(ms.ToArray());
+            //book = null;
+            //ms.Close();
+            //ms.Dispose();
+            //return null;
+
+
+            return File(ms.ToArray(), "application/octet-stream", string.Format("冷链食品处理详情{0}.xls", DateTime.Now.ToString("yyyyMMddHHmmss")));
             
-
-            return null;
         }
 
         public ActionResult Contact()
