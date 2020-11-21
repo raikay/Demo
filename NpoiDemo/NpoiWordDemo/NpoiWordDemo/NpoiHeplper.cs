@@ -1,29 +1,24 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using Newtonsoft.Json;
+﻿using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml.Serialization;
-//using System.Text.RegularExpressions;
 
 namespace NpoiWordDemo
 {
     /// <summary>
-    /// 作者:jomz
+    /// NpoiHeplper
     /// </summary>
     public class NpoiHeplper
     {
         /// <summary>
-        /// 输出模板docx文档(使用字典)
+        /// 输出模板word文档
         /// </summary>
-        /// <param name="tempFilePath">docx文件路径</param>
+        /// <param name="tempFilePath">模板文件路径</param>
         /// <param name="outPath">输出文件路径</param>
         /// <param name="data">字典数据源</param>
         public static void Export(string tempFilePath, string outPath, Dictionary<string, object> data)
@@ -36,10 +31,21 @@ namespace NpoiWordDemo
                 {
                     ReplaceKey(para, data);
                 }
-
                 //遍历表格      
                 foreach (var table in doc.Tables)
                 {
+
+                    var ti = GetTableInfo(table, data);
+                    if (ti.IsList)
+                    {
+                        for (int i = 0; i < ti.Data.Count; i++)
+                        {
+                            var nRow = new XWPFTableRow(Clone<CT_Row>(ti.RowTemp), table);
+                            table.AddRow(nRow);
+                            ReplaceRow(nRow, (Dictionary<string, object>)ti.Data[i]);
+                        }
+
+                    }
                     foreach (var row in table.Rows)
                     {
                         foreach (var cell in row.GetTableCells())
@@ -49,56 +55,6 @@ namespace NpoiWordDemo
                                 ReplaceKey(para, data);
                             }
                         }
-                    }
-                }
-                //遍历表格      
-                foreach (var table in doc.Tables)
-                {
-                    
-                    var ti = GetTableInfo(table, data);
-                    if (ti.IsList)
-                    {
-                        for (int i = 0; i < ti.Data.Count; i++)
-                        {
-                            //MemoryCache memoryCache = new MemoryCache(new MemoryCacheOptions() { });
-                            // memoryCache.Set("11", ti.RowTemp);
-
-                            //object v1 = memoryCache.Get("11");
-
-
-                            //// var ss1 = JsonConvert.SerializeObject();
-                            ////var temprow = JsonConvert.DeserializeObject<XWPFTableRow>(ss1);
-                            //table.AddRow(v1 as XWPFTableRow);
-                            var cells = ti.RowTemp.GetTableCells();
-                            var row = table.CreateRow();
-                            row.RemoveCell(0);
-                            foreach (var item in cells)
-                            {
-                                var cc= row.CreateCell();
-                                
-                                //cc.SetText(item.GetText());
-                                cc = item;
-                                //cc = item;
-
-                            }
-                            // TODO 表格替换还由问题
-                            table.AddRow(row);
-                            var nrow = table.GetRow(table.Rows.Count - 1);
-                            
-                            //table.AddRow(ti.RowTemp);
-                            if (ti.IsDict)
-                            {
-                                    //row.GetCell(1).SetText("111111222333");
-                                    ReplaceRow(nrow, (Dictionary<string, object>)ti.Data[i]);
-
-                            }
-                            else
-                            {
-                                //ReplaceRow(nrow, ti.Data[i]);
-                            }
-                        }
-
-
                     }
                 }
                 //写文件
@@ -114,8 +70,7 @@ namespace NpoiWordDemo
             {
                 foreach (var item in cell.Paragraphs)
                 {
-
-                    ReplaceParagraph(item, data);
+                    ReplaceParagraph(item, data, cell);
                 }
             }
         }
@@ -149,7 +104,8 @@ namespace NpoiWordDemo
             return text.Split('\n');
         }
 
-        private static XWPFParagraph ReplaceParagraph(XWPFParagraph p, Dictionary<string, object> data)
+
+        private static XWPFParagraph ReplaceParagraph(XWPFParagraph p, Dictionary<string, object> data, XWPFTableCell cell)
         {
             XWPFParagraph pr = p;
             var ms = GetMatches(p.Text);
@@ -180,7 +136,9 @@ namespace NpoiWordDemo
                     {
                         if (data.ContainsKey(ks[i]))
                         {
-                            p.ReplaceText(rs[i], data[ks[i]]?.ToString());
+                            cell.SetText(data[ks[i]]?.ToString());
+                            //p.
+                            //p.ReplaceText(rs[i], data[ks[i]]?.ToString());
                         }
                     }
                 }
@@ -218,10 +176,9 @@ namespace NpoiWordDemo
         {
             public bool IsList { get; set; }
             public bool IsDict { get; set; }
-            public XWPFTableRow RowTemp { get; set; }
+            public /*XWPFTableRow*/CT_Row RowTemp { get; set; }
             public IList<object> Data { get; set; }
         }
-
 
         /// <summary>
         /// 只获取列表匹配项
@@ -238,7 +195,7 @@ namespace NpoiWordDemo
         private static TableInfo GetTableInfo(XWPFTable table, Dictionary<string, object> data)
         {
             TableInfo result = new TableInfo();
-            var r0 = table.Rows[table.Rows.Count - 1];
+            var r0 = table.GetRow(table.Rows.Count - 1);
             var c0 = r0.GetCell(r0.GetTableCells().Count - 1);
             var ct = c0.Paragraphs[0].Text;
             var ms = GetListMatches(ct);
@@ -255,7 +212,7 @@ namespace NpoiWordDemo
 
                     if (data.ContainsKey(text))//判断是否是列表
                     {
-                        result.RowTemp = r0;
+                        result.RowTemp = r0.GetCTRow();//new XWPFTableRow() //Clone(r0) as XWPFTableRow;
                         result.IsList = true;
                         result.Data = new List<object>();
                         var dd = data[text];
@@ -267,10 +224,25 @@ namespace NpoiWordDemo
                     }
                 }
             }
+            //删除模板行
+            table.RemoveRow(table.Rows.Count - 1);
             return result;
         }
 
+        public static T Clone<T>(object obj)
+        {
+            object retval;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, obj);
+                ms.Seek(0, SeekOrigin.Begin);
+                retval = bf.Deserialize(ms);
+                ms.Close();
+            }
+            return (T)retval;
 
+        }
 
         private static void ReplaceKeyObjet(XWPFParagraph para, object model)
         {
