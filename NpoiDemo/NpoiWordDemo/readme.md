@@ -114,3 +114,10 @@ public static void Export(string tempFilePath, string outPath, Dictionary<string
 ```
 https://github.com/raikay/Demo/tree/master/NpoiDemo/NpoiWordDemo
 ```
+
+鸣谢：
+```
+https://www.cnblogs.com/jomzhang/p/9555397.html
+https://www.cnblogs.com/deeround/p/11478610.html
+https://github.com/YSGStudyHards/NPOI-ExportWordAndExcel-ImportExcelData
+```
