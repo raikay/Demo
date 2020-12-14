@@ -1,0 +1,29 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "Saltbo's blog",
+  "author": "saltbo",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.2.0",
+    "@vuepress/plugin-blog": "^1.9.2",
+    "@vuepress/plugin-google-analytics": "^1.5.0",
+    "@vuepress/plugin-pwa": "^1.5.2",
+    "@vuepress/plugin-search": "^1.4.0",
+    "@vuepress/theme-blog": "^2.2.0",
+    "busuanzi.pure.js": "^1.0.3",
+    "core-js": "2.6.4",
+    "moment": "^2.24.0",
+    "node-rsa": "^1.0.8",
+    "tailwindcss": "^1.4.6",
+    "vue-moment": "^4.1.0",
+    "vuepress": "^1.5.2",
+    "vuepress-plugin-disqusjs": "^1.0.1",
+    "vuepress-plugin-reading-time": "^0.1.1"
+  }
+}
