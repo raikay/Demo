@@ -1,21 +1,16 @@
----
-title: "首页"
-layout: Home
----
 
-## Activity
-<!--START_SECTION:waka-->
-```text
-Go         38 hrs 57 mins  ███████████████████████▓░   95.33 % 
-TOML       49 mins         ▓░░░░░░░░░░░░░░░░░░░░░░░░   02.03 % 
-SQL        26 mins         ▒░░░░░░░░░░░░░░░░░░░░░░░░   01.09 % 
-YAML       16 mins         ░░░░░░░░░░░░░░░░░░░░░░░░░   00.66 % 
-Makefile   8 mins          ░░░░░░░░░░░░░░░░░░░░░░░░░   00.34 % 
+### 构建：
 ```
-<!--END_SECTION:waka-->
+#blog/
+yarn & yarn build
+```
+*注意在linux上构建，windows可能会出错*  
 
-## Writing
-<PindedPosts />
+### 效果图：
+![IMG](https://gitee.com/imgrep001/m1/raw/master/2020/12/14/20201214220320.png)
 
-## Projects
-<Projects />
+![IMG](https://gitee.com/imgrep001/m1/raw/master/2020/12/14/20201214220455.png)
+
+![IMG](https://gitee.com/imgrep001/m1/raw/master/2020/12/14/20201214220515.png)
+
+![IMG](https://gitee.com/imgrep001/m1/raw/master/2020/12/14/20201214220532.png)
