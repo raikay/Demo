@@ -29,7 +29,8 @@ module.exports = {
 		sidebar: [
       '/api2/',
       '/api3/',
-	  '/api4/'
+	  '/api4/',
+'/api5/'
 		
 
 		]
