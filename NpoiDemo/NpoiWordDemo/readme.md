@@ -114,6 +114,10 @@ public static void Export(string tempFilePath, string outPath, Dictionary<string
 ```
 https://github.com/raikay/Demo/tree/master/NpoiDemo/NpoiWordDemo
 ```
+### 导出图片参考
+```
+https://blog.csdn.net/dengxt/article/details/84748919
+```
 
 鸣谢：
 ```
