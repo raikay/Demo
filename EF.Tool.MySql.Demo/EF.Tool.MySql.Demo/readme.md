@@ -1,16 +1,9 @@
 
-
 ### 添加引用
-
 ```
 Microsoft.EntityFrameworkCore.Design
-Microsoft.EntityFrameworkCore.Sqlite
+Pomelo.EntityFrameworkCore.MySql
 ```
-
-
-
-
-
 ### 1 添加数据库上下文
 
 ```
