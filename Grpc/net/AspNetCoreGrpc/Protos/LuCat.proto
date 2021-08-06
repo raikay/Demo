@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "AspNetCoregRpcService";
+
+import "google/protobuf/empty.proto";
+package LuCat; //定义包名
+
+//定义服务
+service LuCat{
+    //定义方法
+	rpc SuckingCat(ParamRequest) returns(SuckingCatResult);
+}
+
+message SuckingCatResult{
+	string message=1;
+}
+message ParamRequest {
+  int32 id = 1;
+}
