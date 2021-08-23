@@ -9,5 +9,9 @@ for /r %nowPath% %%i in (*.pdb,*.vshost.*) do (del %%i)
 ::delete specify folder(obj,bin)
 for /r %nowPath% %%i in (obj,bin) do (IF EXIST %%i RD /s /q %%i)
 
+::delete specify folder(node_modules)
+for /r %nowPath% %%i in (node_modules) do (IF EXIST %%i RD /s /q %%i)
+
 echo OK
 pause
+
