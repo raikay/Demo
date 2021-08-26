@@ -26,6 +26,7 @@ namespace AspNetCoreGrpcClient
             //var channel = GrpcChannel.ForAddress("http://us-or-cera-1.natfrp.cloud:33000/", new GrpcChannelOptions { HttpClient = httpClient });//
             // var channel = GrpcChannel.ForAddress("http://game.raikay.com:33000/");
 
+            //LuCat.LuCatClient()  添加LuCat.proto文件后自动生成，和服务端LuCat.proto文件一致
             var catClient = new LuCat.LuCatClient(channel);
             var catReply = await catClient.SuckingCatAsync(new ParamRequest { Id=0});
             Console.WriteLine(""+ catReply.Message);
