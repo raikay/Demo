@@ -13,16 +13,16 @@ namespace AspNetCoreGrpcClient
         {
             //AppContext.SetSwitch(
             //    "System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            var httpClientHandler = new HttpClientHandler();
-            // Return `true` to allow certificates that are untrusted/invalid 
-            httpClientHandler.ServerCertificateCustomValidationCallback =
-    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            var httpClient = new HttpClient(httpClientHandler);
+    //        var httpClientHandler = new HttpClientHandler();
+    //        // Return `true` to allow certificates that are untrusted/invalid 
+    //        httpClientHandler.ServerCertificateCustomValidationCallback =
+    //HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+    //        var httpClient = new HttpClient(httpClientHandler);
 
 
 
             //var channel = GrpcChannel.ForAddress("https://game.raikay.com/");
-            var channel = GrpcChannel.ForAddress("https://127.0.0.1:443/", new GrpcChannelOptions { HttpClient = httpClient });//, new GrpcChannelOptions { HttpClient = httpClient }
+            var channel = GrpcChannel.ForAddress("https://game.raikay.com/");//, new GrpcChannelOptions { HttpClient = httpClient }
             //var channel = GrpcChannel.ForAddress("http://us-or-cera-1.natfrp.cloud:33000/", new GrpcChannelOptions { HttpClient = httpClient });//
             // var channel = GrpcChannel.ForAddress("http://game.raikay.com:33000/");
 

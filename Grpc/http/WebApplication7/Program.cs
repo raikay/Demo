@@ -27,7 +27,7 @@ namespace WebApplication7
                     webBuilder.ConfigureKestrel(options =>
                     {
                                 // Setup a HTTP/2 endpoint without TLS.
-                                options.ListenLocalhost(81, o => o.Protocols =
+                                options.ListenLocalhost(80, o => o.Protocols =
                             HttpProtocols.Http2);
                     }); 
                     #endregion
