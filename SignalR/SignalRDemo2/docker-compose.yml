@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  signalrdemo:
+    image: ${DOCKER_REGISTRY-}signalrdemo
+    ports:
+    - "8010:80"
+    build:
+      context: .
+      dockerfile: Dockerfile
