@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRWebDemo", "SignalRWebDemo\SignalRWebDemo.csproj", "{D3437120-6EF3-462D-8DD0-1FA9A2C72A74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsClientDemo", "WindowsFormsClientDemo\WindowsFormsClientDemo.csproj", "{DC43B6BD-A813-46FB-B1D7-BA6307459723}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3437120-6EF3-462D-8DD0-1FA9A2C72A74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3437120-6EF3-462D-8DD0-1FA9A2C72A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3437120-6EF3-462D-8DD0-1FA9A2C72A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3437120-6EF3-462D-8DD0-1FA9A2C72A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC43B6BD-A813-46FB-B1D7-BA6307459723}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC43B6BD-A813-46FB-B1D7-BA6307459723}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC43B6BD-A813-46FB-B1D7-BA6307459723}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC43B6BD-A813-46FB-B1D7-BA6307459723}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6935C973-5C61-4A1B-AFAB-B4EE9448F4EA}
+	EndGlobalSection
+EndGlobal
