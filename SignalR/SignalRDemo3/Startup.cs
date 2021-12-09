@@ -15,7 +15,6 @@ namespace SignalRDemo
             services.AddControllers();
 
             services.AddSignalR();
-            services.AddScoped<SignalRHub>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
