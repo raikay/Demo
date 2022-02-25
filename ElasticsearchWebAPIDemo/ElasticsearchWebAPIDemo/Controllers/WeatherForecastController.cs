@@ -99,7 +99,11 @@ namespace ElasticsearchWebAPIDemo.Controllers
             //}
 
             //var ss = _client.IndexMany(listArticle);
-
+            var article =  new News { Auther = "Auther1", Id = 1, Content = "subtitle1", Title = "titlle1", CreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") };
+            //插入一条，默认索引
+            var s1 = _client.IndexDocument(article);
+            //插入一条，指定索引
+            var s2 = _client.Index(article, s => s.Index("news"));
             return _client.IndexMany(listArticle).IsValid;
         }
 
