@@ -1,0 +1,6 @@
+﻿<#+ 
+private int Square(int i)
+{
+    return i*i;
+} 
+#>

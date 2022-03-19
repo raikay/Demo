@@ -1,0 +1,15 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+<# for(int i = 0; i < 4; i++) { #>
+	这里是文本块，<#= i #> 的平方是 <#= Square(i) #>
+<#}#>
+<#+ 
+private int Square(int i)
+{
+    return i*i;
+}
+#>

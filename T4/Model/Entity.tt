@@ -1,0 +1,38 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Collections" #>
+<#@ assembly name="$(TargetPath)" #>
+<#@ output extension=".cs" #>
+<#@ import namespace="Model" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#
+WriteLine("using System;");
+WriteLine("using System.Collections.Generic;");
+WriteLine("using System.Text;");
+WriteLine("");
+WriteLine("namespace Model.Entity");
+WriteLine("{");
+List<BasicDataDto> TabLst = MySqlBasicDataHelper.Query<BasicDataDto>("testripx");
+var GroupTabLst = TabLst.GroupBy(P => P.TabName);
+foreach (var Table in GroupTabLst)
+{
+    string ClassName = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(Table.Key.Replace("-","_"));
+    PushIndent("	");
+	WriteLine("public class " + ClassName);
+    WriteLine("{");
+	PushIndent("	");
+    foreach (var item in Table)
+    {		
+		WriteLine("/// <summary>");
+		WriteLine("/// " + item.Annotation.Replace("\n", "").Replace(" ","").Replace("\t","").Replace("\r",""));
+		WriteLine("/// </summary>");
+		WriteLine("public " + MySqlBasicDataHelper.GetType(item.PropertyDataType, item.MaxLength) + " " + item.PropertyName + " { get; set; }");
+		WriteLine("");
+    }
+	PopIndent();
+    WriteLine("}");
+	PopIndent();
+}
+WriteLine("}");
+#>

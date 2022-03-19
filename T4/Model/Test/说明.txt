@@ -1,0 +1,75 @@
+﻿使用 Visual Studio 2015 Update 2 及更高版本时，可在 T4 模板指令中使用 C# 6.0 版功能。
+
+设计时模板: TextTemplatingFileGenerator
+运行时模板：TextTemplatingFilePreprocessor
+
+也称为预处理过的模板，运行时模板生成文本字符串，通常作为其输出的一部分应用程序中执行。
+通常使用多个模块读取单个输入的文件或数据库中的数据并生成一些您 .cs， .vb，或其他源文件。
+
+下面情况下，将执行模板，同时生成附属文件：
+保存模板。
+单击转换所有模板中生成菜单。 这将转换的 Visual Studio 解决方案中的所有模板。
+在中解决方案资源管理器文件，任何的快捷菜单上，选择运行自定义工具。 使用此方法可以转换选定的模板子集。
+
+
+文本模板由以下部件组成：
+指令-控制模板的处理方式的元素。 <#@ ... #>
+文本块-内容的直接复制到输出。
+控制块-程序代码，用于将变量值插入到文本，以及控制条件或重复的文本部分。  <# ... #> <#= ... #> <#+ ... #>
+
+指令  https://docs.microsoft.com/zh-cn/visualstudio/modeling/t4-text-template-directives?view=vs-2019
+<#@ template [language="VB"] [compilerOptions="options"] [culture="code"] [debug="true"] [hostspecific="true"] [inherits="templateBaseClass"] [visibility="internal"] [linePragmas="false"] #>
+<#@ assembly name="[assembly strong name|assembly file name]" #>
+<#@ import namespace="namespace" #>
+<#@ output extension=".cs"#>
+<#@ include file="filePath" [once="true"] #>
+<#@ parameter type="Full.TypeName" name="ParameterName" #>
+<#@ CleanupBehavior processor="T4VSHost" CleanupAfterProcessingtemplate="true" #>
+
+template 指令
+hostspecific:有效值true、false，默认为false。如果将此特性的值设置为 true，则会将名为 Host 的属性添加到由文本模板生成的类中。 该属性是对转换引擎的宿主的引用，并声明为Microsoft.VisualStudio.TextTemplating.ITextTemplatingEngineHost。
+inherits：可以指定模板的程序代码可以继承自另一个类，这个类也可以从文本模板生成。目前木有使用过，基本上可以忽略
+
+assembly 指令
+$(SolutionDir):当前项目所在解决方案目录
+$(ProjectDir):当前项目所在目录
+$(TargetPath):当前项目编译输出文件绝对路径
+$(TargetDir):当前项目编译输出目录，即web项目的Bin目录，控制台、类库项目bin目录下的debug或release目录(取决于当前的编译模式)
+举个例子：比如我们在D盘根目录建立了一个控制台项目MyTest，解决方案目录为D:\Feng，项目目录为
+D:\Feng\MyTest，那么此时在Debug编译模式下
+$(SolutionDir)的值为D:\Feng
+$(ProjectDir)的值为D:\Feng\MyTest
+$(TargetPath)值为D:\Feng\MyTest\bin\Debug\MyTest.exe
+$(TargetDir)值为D:\Feng\MyTest\bin\Debug\
+
+
+
+控制块 https://docs.microsoft.com/zh-cn/visualstudio/modeling/text-template-control-blocks?view=vs-2019
+控制块之间可能无法相互嵌套在各自内部。
+如果包含其他文本模板，则必须确保变量名称在所有包含的模板中是唯一的。
+
+标准控制块（不可嵌套）<# ... #><#  ... #>
+表达式控制块 <#= ... #>
+
+类功能控制块 <#+ ... #>  类功能块可以包含文本块    类功能控制块必须编写在文件末尾
+类功能控制块必须编写在文件末尾。
+类功能控制块常用于编写帮助器函数。 
+类功能控制块定义属性、方法或不应包含在主转换中的所有其他代码。 
+通常情况下，类功能块位于单独的文件，以便它们可以成为包含由多个文本模板。
+
+<# for(int i = 0; i < 4; i++) { #>
+	这里是文本块，<#= i #> 的平方是表达式块 <#= Square(i) #>
+<#}#>
+<#+ 
+private int Square(int i)
+{
+    return i*i;
+} 
+#>
+
+
+Write()输出
+WriteLine()换行输出
+PushIndent()缩进 
+PopIndent()减缩进 
+ClearIndent()删除所有的缩进
